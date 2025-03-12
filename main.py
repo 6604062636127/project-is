@@ -1,35 +1,80 @@
-import streamlit as st
-import pickle
 import pandas as pd
+from xgboost import XGBRegressor
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error, r2_score
+import pickle
+import streamlit as st
 
-# Load the trained XGBoost model
-model = pickle.load(open('model.pkl', 'rb'))
+# ฟังก์ชันสำหรับโหลดข้อมูล
+def load_data(file_path):
+    data = pd.read_csv(file_path)
+    data.fillna(method='ffill', inplace=True)
+    data = pd.get_dummies(data, drop_first=True)
+    return data
 
-# Set the title of the app
-st.title('Car Price Prediction App')
+# ฟังก์ชันสำหรับฝึกโมเดล
+def train_model(X, y):
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    
+    model = XGBRegressor(objective='reg:squarederror', random_state=42)
+    model.fit(X_train, y_train)
 
-# Create input fields for user data
-age = st.selectbox("What is the age of your car?", (1, 2, 3))
-hp = st.slider("What is the horsepower of your car?", 60, 200, step=5)
-km = st.slider("What is the km of your car?", 0, 100000, step=500)
-car_model = st.selectbox("Select model of your car", ('A1', 'A2', 'A3', 'Astra', 'Clio', 'Corsa', 'Espace', 'Insignia'))
+    y_pred = model.predict(X_test)
+    mse = mean_squared_error(y_test, y_pred)
+    r2 = r2_score(y_test, y_pred)
 
-# Create a dictionary to hold user inputs
-user_input = {
-    "age": age,
-    "hp": hp,
-    "km": km,
-    "model": car_model
-}
+    print(f'XGBoost Mean Squared Error: {mse}')
+    print(f'XGBoost R^2 Score: {r2}')
 
-# Convert the dictionary to a DataFrame
-input_df = pd.DataFrame.from_dict([user_input])
+    return model, X_test, y_test
 
-# Prepare the input for prediction
-input_df = pd.get_dummies(input_df).reindex(columns=model.get_booster().feature_names, fill_value=0)
+# ฟังก์ชันสำหรับบันทึกโมเดล
+def save_model(model, filename):
+    with open(filename, 'wb') as f:
+        pickle.dump(model, f)
 
-# Make predictions
-prediction = model.predict(input_df)
+# ฟังก์ชันสำหรับโหลดโมเดล
+def load_model(filename):
+    with open(filename, 'rb') as f:
+        return pickle.load(f)
 
-# Display the prediction result
-st.success(f"The estimated price of your car is €{int(prediction[0])}.")
+# ฟังก์ชันหลัก
+def main():
+    # กำหนดที่อยู่ของไฟล์ CSV
+    file_path = "Housing.csv"  # เปลี่ยนเป็นที่อยู่ของไฟล์ CSV ของคุณ
+
+    # โหลดข้อมูล
+    data = load_data(file_path)
+
+    # แยกฟีเจอร์และเป้าหมาย
+    X = data.drop('price', axis=1)
+    y = data['price']
+
+    # ฝึกโมเดล
+    model = train_model(X, y)[0]
+
+    # บันทึกโมเดล
+    save_model(model, 'model.pkl')
+
+    # สร้างแอป Streamlit
+    st.title('Housing Price Prediction App')
+
+    # สร้างฟอร์มสำหรับรับข้อมูลจากผู้ใช้
+    user_input = {}
+    for column in X.columns:
+        user_input[column] = st.number_input(f'Enter {column}', value=0)
+
+    # แปลงข้อมูลผู้ใช้เป็น DataFrame
+    input_df = pd.DataFrame([user_input])
+
+    # โหลดโมเดลที่บันทึกไว้
+    loaded_model = load_model('model.pkl')
+
+    # ทำนายผล
+    prediction = loaded_model.predict(input_df)
+
+    # แสดงผลลัพธ์
+    st.success(f'The estimated price of the house is: ${int(prediction[0])}')
+
+if __name__ == "__main__":
+    main()
