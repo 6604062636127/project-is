@@ -4,9 +4,13 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 import pickle
 import streamlit as st
+import os
 
 # ฟังก์ชันสำหรับโหลดข้อมูล
 def load_data(file_path):
+    if not os.path.exists(file_path):
+        st.error(f"Error: The file {file_path} does not exist.")
+        return None
     data = pd.read_csv(file_path)
     data.fillna(method='ffill', inplace=True)
     data = pd.get_dummies(data, drop_first=True)
@@ -23,10 +27,10 @@ def train_model(X, y):
     mse = mean_squared_error(y_test, y_pred)
     r2 = r2_score(y_test, y_pred)
 
-    print(f'XGBoost Mean Squared Error: {mse}')
-    print(f'XGBoost R^2 Score: {r2}')
+    st.write(f'XGBoost Mean Squared Error: {mse:.2f}')
+    st.write(f'XGBoost R^2 Score: {r2:.2f}')
 
-    return model, X_test, y_test
+    return model
 
 # ฟังก์ชันสำหรับบันทึกโมเดล
 def save_model(model, filename):
@@ -45,13 +49,15 @@ def main():
 
     # โหลดข้อมูล
     data = load_data(file_path)
+    if data is None:
+        return  # หยุดการทำงานหากไม่สามารถโหลดข้อมูลได้
 
     # แยกฟีเจอร์และเป้าหมาย
     X = data.drop('price', axis=1)
     y = data['price']
 
     # ฝึกโมเดล
-    model = train_model(X, y)[0]
+    model = train_model(X, y)
 
     # บันทึกโมเดล
     save_model(model, 'model.pkl')
@@ -70,11 +76,13 @@ def main():
     # โหลดโมเดลที่บันทึกไว้
     loaded_model = load_model('model.pkl')
 
-    # ทำนายผล
-    prediction = loaded_model.predict(input_df)
+    # ปุ่มทำนาย
+    if st.button('Predict Price'):
+        # ทำนายผล
+        prediction = loaded_model.predict(input_df)
 
-    # แสดงผลลัพธ์
-    st.success(f'The estimated price of the house is: ${int(prediction[0])}')
+        # แสดงผลลัพธ์
+        st.success(f'The estimated price of the house is: ${int(prediction[0]):,}')
 
 if __name__ == "__main__":
     main()
