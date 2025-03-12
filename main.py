@@ -53,7 +53,9 @@ def main():
         return  # หยุดการทำงานหากไม่สามารถโหลดข้อมูลได้
 
     # แยกฟีเจอร์และเป้าหมาย
-    X = data.drop('price', axis=1)
+    X = data[['Area', 'Bedrooms', 'Bathrooms', 'Parking', 'mainroad_yes', 'guestroom_yes', 
+               'basement_yes', 'hotwaterheating_yes', 'airconditioning_yes', 
+               'prefarea_yes', 'furnishingstatus_semi-furnished', 'furnishingstatus_unfurnished']]
     y = data['price']
 
     # ฝึกโมเดล
@@ -66,23 +68,20 @@ def main():
     st.title('Housing Price Prediction App')
 
     # สร้างฟอร์มสำหรับรับข้อมูลจากผู้ใช้
-    user_input = {}
-    for column in X.columns:
-        user_input[column] = st.number_input(f'Enter {column}', value=0)
+    area = st.number_input('Enter Area (in sq ft)', value=0)
+    bedrooms = st.number_input('Enter Number of Bedrooms', value=0)
+    bathrooms = st.number_input('Enter Number of Bathrooms', value=0)
+    parking = st.number_input('Enter Number of Parking Spaces', value=0)
 
-    # แปลงข้อมูลผู้ใช้เป็น DataFrame
-    input_df = pd.DataFrame([user_input])
+    # ค่าบูลีน
+    mainroad_yes = st.radio('Is the house near the main road?', ('No', 'Yes'))
+    guestroom_yes = st.radio('Does the house have a guest room?', ('No', 'Yes'))
+    basement_yes = st.radio('Does the house have a basement?', ('No', 'Yes'))
+    hotwaterheating_yes = st.radio('Does the house have hot water heating?', ('No', 'Yes'))
+    airconditioning_yes = st.radio('Does the house have air conditioning?', ('No', 'Yes'))
+    prefarea_yes = st.radio('Is the house in a preferred area?', ('No', 'Yes'))
+    furnishingstatus_semi_furnished = st.radio('Is the house semi-furnished?', ('No', 'Yes'))
+    furnishingstatus_unfurnished = st.radio('Is the house unfurnished?', ('No', 'Yes'))
 
-    # โหลดโมเดลที่บันทึกไว้
-    loaded_model = load_model('model.pkl')
-
-    # ปุ่มทำนาย
-    if st.button('Predict Price'):
-        # ทำนายผล
-        prediction = loaded_model.predict(input_df)
-
-        # แสดงผลลัพธ์
-        st.success(f'The estimated price of the house is: ${int(prediction[0]):,}')
-
-if __name__ == "__main__":
-    main()
+    # แปลงค่าบูลีนเป็น 0 หรือ 1
+    mainroad_yes = 1 if mainroad_yes ==
