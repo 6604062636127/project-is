@@ -42,7 +42,6 @@ def load_model(filename):
     with open(filename, 'rb') as f:
         return pickle.load(f)
 
-# ฟังก์ชันหลัก
 def main():
     # กำหนดที่อยู่ของไฟล์ CSV
     file_path = "Housing.csv"  # เปลี่ยนเป็นที่อยู่ของไฟล์ CSV ของคุณ
@@ -52,11 +51,18 @@ def main():
     if data is None:
         return  # หยุดการทำงานหากไม่สามารถโหลดข้อมูลได้
 
+    # แสดงชื่อคอลัมน์ใน DataFrame
+    st.write("Columns in the dataset:", data.columns)
+
     # แยกฟีเจอร์และเป้าหมาย
-    X = data[['Area', 'Bedrooms', 'Bathrooms', 'Parking', 'mainroad_yes', 'guestroom_yes', 
-               'basement_yes', 'hotwaterheating_yes', 'airconditioning_yes', 
-               'prefarea_yes', 'furnishingstatus_semi-furnished', 'furnishingstatus_unfurnished']]
-    y = data['price']
+    try:
+        X = data[['Area', 'Bedrooms', 'Bathrooms', 'Parking', 'mainroad_yes', 'guestroom_yes', 
+                   'basement_yes', 'hotwaterheating_yes', 'airconditioning_yes', 
+                   'prefarea_yes', 'furnishingstatus_semi-furnished', 'furnishingstatus_unfurnished']]
+        y = data['price']
+    except KeyError as e:
+        st.error(f"KeyError: {e}. Please check the column names in the dataset.")
+        return
 
     # ฝึกโมเดล
     model = train_model(X, y)
@@ -111,7 +117,6 @@ def main():
         prediction = loaded_model.predict(input_df)
 
         # แสดงผลลัพธ์
-        st.success(f'The estimated price of the house is: ${int(prediction[0]):,}')
-
+ st.success(f'The estimated price of the house is: ${int(prediction[0]):,}')
 if __name__ == "__main__":
     main()
