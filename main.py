@@ -1,4 +1,10 @@
 import streamlit as st
+import pickle
+import numpy as np
+
+# โหลดโมเดลจากไฟล์ model.pkl
+with open('model.pkl', 'rb') as file:
+    model = pickle.load(file)
 
 # ตั้งค่าหน้าเว็บ
 st.set_page_config(
@@ -12,27 +18,21 @@ st.set_page_config(
 st.title("ยินดีต้อนรับสู่แอป Streamlit ของฉัน!")
 
 # ส่วนสำหรับรับข้อมูลจากผู้ใช้
-user_name = st.text_input("กรุณากรอกชื่อของคุณ:")
-if user_name:
-    st.write(f"สวัสดี, {user_name}!")
+st.header("กรอกข้อมูลเพื่อทำการพยากรณ์")
+input_feature1 = st.number_input("คุณสมบัติ 1:", value=0.0)
+input_feature2 = st.number_input("คุณสมบัติ 2:", value=0.0)
+input_feature3 = st.number_input("คุณสมบัติ 3:", value=0.0)
 
-# ส่วนสำหรับแสดงข้อมูล
-st.header("ข้อมูลที่น่าสนใจ")
-st.write("นี่คือข้อมูลที่น่าสนใจเกี่ยวกับ Streamlit:")
-
-# แสดงกราฟหรือข้อมูลเพิ่มเติม
-st.line_chart([1, 2, 3, 4, 5])
-
-# ส่วนสำหรับแสดงบล็อก
-st.subheader("บล็อกยอดนิยม")
-blogs = [
-    {"title": "บล็อก 1", "url": "https://example.com/blog1"},
-    {"title": "บล็อก 2", "url": "https://example.com/blog2"},
-    {"title": "บล็อก 3", "url": "https://example.com/blog3"},
-]
-
-for blog in blogs:
-    st.markdown(f"- [{blog['title']}]({blog['url']})")
+# เมื่อผู้ใช้กดปุ่มพยากรณ์
+if st.button("ทำการพยากรณ์"):
+    # สร้างอาร์เรย์จากข้อมูลที่ผู้ใช้กรอก
+    input_data = np.array([[input_feature1, input_feature2, input_feature3]])
+    
+    # ทำการพยากรณ์
+    prediction = model.predict(input_data)
+    
+    # แสดงผลลัพธ์
+    st.write(f"ผลลัพธ์การพยากรณ์: {prediction[0]}")
 
 # ส่วนท้าย
 st.write("ขอบคุณที่เข้าชมแอปของเรา!")
