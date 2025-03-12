@@ -34,8 +34,7 @@ X_new = pd.DataFrame({
 })
 
 # ตรวจสอบให้แน่ใจว่า X_new มีฟีเจอร์เหมือนกับข้อมูลที่ใช้ฝึกฝน
-# (หากใช้ pandas DataFrame) คุณสามารถแปลงเป็น numpy array
-X_new = X_new.values
+X_new = X_new[scaler.feature_names_in_]  # เลือกฟีเจอร์ที่ตรงกับ scaler
 
 # ปรับมาตรฐานข้อมูลใหม่ด้วย StandardScaler ที่ฝึกไว้
 X_new_scaled = scaler.transform(X_new)
