@@ -83,7 +83,7 @@ def main():
     furnishingstatus_semi_furnished = st.radio('Is the house semi-furnished?', ('No', 'Yes'))
     furnishingstatus_unfurnished = st.radio('Is the house unfurnished?', ('No', 'Yes'))
 
-        # แปลงค่าบูลีนเป็น 0 หรือ 1
+      # แปลงค่าบูลีนเป็น 0 หรือ 1
     mainroad_yes = 1 if mainroad_yes == 'Yes' else 0
     guestroom_yes = 1 if guestroom_yes == 'Yes' else 0
     basement_yes = 1 if basement_yes == 'Yes' else 0
@@ -92,7 +92,6 @@ def main():
     prefarea_yes = 1 if prefarea_yes == 'Yes' else 0
     furnishingstatus_semi_furnished = 1 if furnishingstatus_semi_furnished == 'Yes' else 0
     furnishingstatus_unfurnished = 1 if furnishingstatus_unfurnished == 'Yes' else 0
-
     # ปุ่มทำนาย
     if st.button('Predict Price'):
         # โหลดโมเดลที่บันทึกไว้
