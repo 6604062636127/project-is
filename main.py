@@ -83,5 +83,35 @@ def main():
     furnishingstatus_semi_furnished = st.radio('Is the house semi-furnished?', ('No', 'Yes'))
     furnishingstatus_unfurnished = st.radio('Is the house unfurnished?', ('No', 'Yes'))
 
-    # แปลงค่าบูลีนเป็น 0 หรือ 1
-    mainroad_yes = 1 if mainroad_yes ==
+        # แปลงค่าบูลีนเป็น 0 หรือ 1
+    mainroad_yes = 1 if mainroad_yes == 'Yes' else 0
+    guestroom_yes = 1 if guestroom_yes == 'Yes' else 0
+    basement_yes = 1 if basement_yes == 'Yes' else 0
+    hotwaterheating_yes = 1 if hotwaterheating_yes == 'Yes' else 0
+    airconditioning_yes = 1 if airconditioning_yes == 'Yes' else 0
+    prefarea_yes = 1 if prefarea_yes == 'Yes' else 0
+    furnishingstatus_semi_furnished = 1 if furnishingstatus_semi_furnished == 'Yes' else 0
+    furnishingstatus_unfurnished = 1 if furnishingstatus_unfurnished == 'Yes' else 0
+
+    # ปุ่มทำนาย
+    if st.button('Predict Price'):
+        # โหลดโมเดลที่บันทึกไว้
+        loaded_model = load_model('model.pkl')
+
+        # แปลงข้อมูลผู้ใช้เป็น DataFrame
+        input_df = pd.DataFrame([[area, bedrooms, bathrooms, parking, mainroad_yes, guestroom_yes,
+                                   basement_yes, hotwaterheating_yes, airconditioning_yes,
+                                   prefarea_yes, furnishingstatus_semi_furnished, furnishingstatus_unfurnished]],
+                                 columns=['Area', 'Bedrooms', 'Bathrooms', 'Parking', 'mainroad_yes',
+                                          'guestroom_yes', 'basement_yes', 'hotwaterheating_yes',
+                                          'airconditioning_yes', 'prefarea_yes',
+                                          'furnishingstatus_semi-furnished', 'furnishingstatus_unfurnished'])
+
+        # ทำนายผล
+        prediction = loaded_model.predict(input_df)
+
+        # แสดงผลลัพธ์
+        st.success(f'The estimated price of the house is: ${int(prediction[0]):,}')
+
+if __name__ == "__main__":
+    main()
