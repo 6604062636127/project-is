@@ -53,7 +53,7 @@ def main():
         return  # หยุดการทำงานหากไม่สามารถโหลดข้อมูลได้
 
     # แยกฟีเจอร์และเป้าหมาย
-    X = data[['Area', 'Bedrooms', 'Bathrooms', 'Parking']]  # ใช้เฉพาะฟีเจอร์ที่ต้องการ
+    X = data.drop('price', axis=1)
     y = data['price']
 
     # ฝึกโมเดล
@@ -66,19 +66,18 @@ def main():
     st.title('Housing Price Prediction App')
 
     # สร้างฟอร์มสำหรับรับข้อมูลจากผู้ใช้
-    area = st.number_input('Enter Area (in sq ft)', value=0)
-    bedrooms = st.number_input('Enter Number of Bedrooms', value=0)
-    bathrooms = st.number_input('Enter Number of Bathrooms', value=0)
-    parking = st.number_input('Enter Number of Parking Spaces', value=0)
+    user_input = {}
+    for column in X.columns:
+        user_input[column] = st.number_input(f'Enter {column}', value=0)
+
+    # แปลงข้อมูลผู้ใช้เป็น DataFrame
+    input_df = pd.DataFrame([user_input])
+
+    # โหลดโมเดลที่บันทึกไว้
+    loaded_model = load_model('model.pkl')
 
     # ปุ่มทำนาย
     if st.button('Predict Price'):
-        # โหลดโมเดลที่บันทึกไว้
-        loaded_model = load_model('model.pkl')
-
-        # แปลงข้อมูลผู้ใช้เป็น DataFrame
-        input_df = pd.DataFrame([[area, bedrooms, bathrooms, parking]], columns=['Area', 'Bedrooms', 'Bathrooms', 'Parking'])
-
         # ทำนายผล
         prediction = loaded_model.predict(input_df)
 
