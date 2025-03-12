@@ -17,7 +17,7 @@ stories = st.number_input("จำนวนชั้น", min_value=1, max_value=
 parking = st.number_input("ที่จอดรถ", min_value=0, max_value=5, step=1)
 
 # ฟีเจอร์ที่แปลงจากข้อมูลเดิม
-price_per_sqft = 0  # ค่าเริ่มต้น (อาจต้องแก้ไขให้เหมาะสม)
+price_per_sqft = area / 1000  # ปรับการคำนวณให้เหมาะสมกับข้อมูลของคุณ
 rooms_per_sqft = (bedrooms + bathrooms) / area
 parking_per_sqft = parking / area
 
@@ -32,6 +32,10 @@ X_new = pd.DataFrame({
     "rooms_per_sqft": [rooms_per_sqft],
     "parking_per_sqft": [parking_per_sqft]
 })
+
+# ตรวจสอบให้แน่ใจว่า X_new มีฟีเจอร์เหมือนกับข้อมูลที่ใช้ฝึกฝน
+# (หากใช้ pandas DataFrame) คุณสามารถแปลงเป็น numpy array
+X_new = X_new.values
 
 # ปรับมาตรฐานข้อมูลใหม่ด้วย StandardScaler ที่ฝึกไว้
 X_new_scaled = scaler.transform(X_new)
