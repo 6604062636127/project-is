@@ -21,25 +21,34 @@ price_per_sqft = area / 1000  # ปรับการคำนวณให้เ
 rooms_per_sqft = (bedrooms + bathrooms) / area
 parking_per_sqft = parking / area
 
-# สร้าง DataFrame จากข้อมูลที่ผู้ใช้ป้อน
+# 🔹 ข้อมูลใหม่ (ต้องมีฟีเจอร์ครบถ้วน)
 X_new = pd.DataFrame({
-    "area": [area],
-    "bedrooms": [bedrooms],
-    "bathrooms": [bathrooms],
-    "stories": [stories],
-    "parking": [parking],
-    "price_per_sqft": [price_per_sqft],
-    "rooms_per_sqft": [rooms_per_sqft],
-    "parking_per_sqft": [parking_per_sqft]
+    'area': [5000],
+    'bedrooms': [3],
+    'bathrooms': [2],
+    'stories': [2],
+    'mainroad': ['yes'],
+    'guestroom': ['no'],
+    'basement': ['no'],
+    'hotwaterheating': ['no'],
+    'airconditioning': ['yes'],
+    'parking': [1],
+    'prefarea': ['yes'],
+    'furnishingstatus': ['furnished']
 })
 
-# ตรวจสอบให้แน่ใจว่า X_new มีฟีเจอร์เหมือนกับข้อมูลที่ใช้ฝึกฝน
-X_new = X_new[scaler.feature_names_in_]  # เลือกฟีเจอร์ที่ตรงกับ scaler
+# 🔹 คำนวณฟีเจอร์ที่สร้างไว้ตอน Train
+X_new['price_per_sqft'] = 0  # ไม่รู้ราคาจริง ให้ใส่ค่า Placeholder
+X_new['rooms_per_sqft'] = (X_new['bedrooms'] + X_new['bathrooms']) / X_new['area']
+X_new['parking_per_sqft'] = X_new['parking'] / X_new['area']
 
-# ปรับมาตรฐานข้อมูลใหม่ด้วย StandardScaler ที่ฝึกไว้
-X_new_scaled = scaler.transform(X_new)
+# 🔹 แปลงข้อมูล Object ให้เป็นตัวเลข (ใช้ LabelEncoder ที่เคย Train ไว้)
+for col in label_encoders:
+    X_new[col] = label_encoders[col].transform(X_new[col])
 
-# ทำนายราคาบ้าน
-if st.button("🔮 ทำนายราคา"):
-    predicted_price = model.predict(X_new_scaled)
-    st.success(f"🏠 ราคาบ้านที่ทำนายได้: {predicted_price[0]:,.2f} บาท")
+# 🔹 จัดเรียงคอลัมน์ให้ตรงกับตอน Train
+X_new = X_new[X_train.columns]
+
+# 🔹 ทำนายราคาบ้าน
+predicted_price = rf_model.predict(X_new)
+print(f"ราคาบ้านที่ทำนายได้: {predicted_price[0]:,.2f} บาท")
