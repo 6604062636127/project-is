@@ -3,7 +3,7 @@ import pandas as pd
 import joblib
 
 # โหลดโมเดลที่เทรนไว้
-model = joblib.load("Housing.pkl")
+model = joblib.load("model.pkl")
 scaler = joblib.load("scaler.pkl")
 
 st.title("🏡 House Price Prediction App")
