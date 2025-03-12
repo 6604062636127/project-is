@@ -1,36 +1,42 @@
 import streamlit as st
-import joblib
-import numpy as np
 import pandas as pd
+import joblib
 
-# Set the title of your app
-st.title('My Streamlit App')
+# โหลดโมเดลที่เทรนไว้
+model = joblib.load("Housing.pkl")
+scaler = joblib.load("scaler.pkl")
 
-# Show a simple welcome message
-st.write('Welcome to the Streamlit app!')
+st.title("🏡 House Price Prediction App")
+st.write("ใส่ข้อมูลเกี่ยวกับบ้านเพื่อทำนายราคา")
 
-# Example of loading a saved model using joblib
-# (Assuming you've saved a model in a file called 'model.pkl')
-try:
-    model = joblib.load('House.pkl')
-    st.write("Model loaded successfully!")
-except FileNotFoundError:
-    st.write("No model found. Please upload a model.")
-    
-# Sample input from the user (this could be any input, such as a number or text)
-user_input = st.number_input('Enter a number for prediction', min_value=0, max_value=100, value=10)
+# สร้างอินพุตให้ผู้ใช้ป้อนข้อมูล
+area = st.number_input("พื้นที่ (ตร.ฟุต)", min_value=500, max_value=20000, step=100)
+bedrooms = st.number_input("จำนวนห้องนอน", min_value=1, max_value=10, step=1)
+bathrooms = st.number_input("จำนวนห้องน้ำ", min_value=1, max_value=5, step=1)
+stories = st.number_input("จำนวนชั้น", min_value=1, max_value=4, step=1)
+parking = st.number_input("ที่จอดรถ", min_value=0, max_value=5, step=1)
 
-# If a model is loaded, make predictions
-if 'model' in locals():
-    prediction = model.predict(np.array([[user_input]]))
-    st.write(f'Prediction: {prediction[0]}')
+# ฟีเจอร์ที่แปลงจากข้อมูลเดิม
+price_per_sqft = 0  # ค่าเริ่มต้น (อาจต้องแก้ไขให้เหมาะสม)
+rooms_per_sqft = (bedrooms + bathrooms) / area
+parking_per_sqft = parking / area
 
-# Add some data visualization or analysis (optional)
-# Example: Show a simple DataFrame
-data = pd.DataFrame({
-    'Column 1': [1, 2, 3],
-    'Column 2': [4, 5, 6]
+# สร้าง DataFrame จากข้อมูลที่ผู้ใช้ป้อน
+X_new = pd.DataFrame({
+    "area": [area],
+    "bedrooms": [bedrooms],
+    "bathrooms": [bathrooms],
+    "stories": [stories],
+    "parking": [parking],
+    "price_per_sqft": [price_per_sqft],
+    "rooms_per_sqft": [rooms_per_sqft],
+    "parking_per_sqft": [parking_per_sqft]
 })
 
-st.write('Here is some sample data:')
-st.write(data)
+# ปรับมาตรฐานข้อมูลใหม่ด้วย StandardScaler ที่ฝึกไว้
+X_new_scaled = scaler.transform(X_new)
+
+# ทำนายราคาบ้าน
+if st.button("🔮 ทำนายราคา"):
+    predicted_price = model.predict(X_new_scaled)
+    st.success(f"🏠 ราคาบ้านที่ทำนายได้: {predicted_price[0]:,.2f} บาท")
