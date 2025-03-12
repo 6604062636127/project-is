@@ -74,16 +74,16 @@ def main():
     parking = st.number_input('Enter Number of Parking Spaces', value=0)
 
     # ค่าบูลีน
-    mainroad_yes = st.radio('Is the house near the main road?', ('No', 'Yes'))
-    guestroom_yes = st.radio('Does the house have a guest room?', ('No', 'Yes'))
-    basement_yes = st.radio('Does the house have a basement?', ('No', 'Yes'))
-    hotwaterheating_yes = st.radio('Does the house have hot water heating?', ('No', 'Yes'))
-    airconditioning_yes = st.radio('Does the house have air conditioning?', ('No', 'Yes'))
-    prefarea_yes = st.radio('Is the house in a preferred area?', ('No', 'Yes'))
-    furnishingstatus_semi_furnished = st.radio('Is the house semi-furnished?', ('No', 'Yes'))
-    furnishingstatus_unfurnished = st.radio('Is the house unfurnished?', ('No', 'Yes'))
+    mainroad_yes = st.radio('Is the house near the main road?', ('Yes', 'No'))
+    guestroom_yes = st.radio('Does the house have a guest room?', ('Yes', 'No'))
+    basement_yes = st.radio('Does the house have a basement?', ('Yes', 'No'))
+    hotwaterheating_yes = st.radio('Does the house have hot water heating?', ('Yes', 'No'))
+    airconditioning_yes = st.radio('Does the house have air conditioning?', ('Yes', 'No'))
+    prefarea_yes = st.radio('Is the house in a preferred area?', ('Yes', 'No'))
+    furnishingstatus_semi_furnished = st.radio('Is the house semi-furnished?', ('Yes', 'No'))
+    furnishingstatus_unfurnished = st.radio('Is the house unfurnished?', ('Yes', 'No'))
 
-      # แปลงค่าบูลีนเป็น 0 หรือ 1
+    # แปลงค่าบูลีนเป็น 0 หรือ 1
     mainroad_yes = 1 if mainroad_yes == 'Yes' else 0
     guestroom_yes = 1 if guestroom_yes == 'Yes' else 0
     basement_yes = 1 if basement_yes == 'Yes' else 0
@@ -92,6 +92,7 @@ def main():
     prefarea_yes = 1 if prefarea_yes == 'Yes' else 0
     furnishingstatus_semi_furnished = 1 if furnishingstatus_semi_furnished == 'Yes' else 0
     furnishingstatus_unfurnished = 1 if furnishingstatus_unfurnished == 'Yes' else 0
+
     # ปุ่มทำนาย
     if st.button('Predict Price'):
         # โหลดโมเดลที่บันทึกไว้
