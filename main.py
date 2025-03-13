@@ -30,6 +30,15 @@ def plot_results(y_test, predicted_prices):
 # สร้าง UI สำหรับ Streamlit
 st.title("การทำนายราคาอสังหาริมทรัพย์")
 
+# รับข้อมูลพื้นที่บ้านจากผู้ใช้
+area_input = st.number_input("กรุณากรอกพื้นที่บ้าน (ตารางฟุต)", min_value=0.0)
+
+# แปลงพื้นที่จากตารางฟุตเป็นตารางเมตร
+area_in_square_meters = area_input * 0.092903
+
+# แสดงพื้นที่ที่แปลงแล้ว
+st.write(f"พื้นที่บ้านที่แปลงเป็นตารางเมตร: {area_in_square_meters:.2f} ตารางเมตร")
+
 # อ่านข้อมูลจากไฟล์ CSV โดยตรง
 df = pd.read_csv('Housing.csv')
 
