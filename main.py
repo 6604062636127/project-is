@@ -7,6 +7,9 @@ import matplotlib.pyplot as plt
 with open('random_forest_model.pkl', 'rb') as file:
     model = pickle.load(file)
 
+# อ่านข้อมูลจากไฟล์ Housing.csv
+df = pd.read_csv('Housing.csv')
+
 # ชื่อของแอปพลิเคชัน
 st.title("House Price Prediction App")
 
@@ -33,13 +36,17 @@ if st.button("Predict Price"):
     # แสดงกราฟ
     st.subheader("Price Prediction Visualization")
     
-    # สร้างกราฟ
+    # สร้างกราฟจุด
     plt.figure(figsize=(10, 5))
-    plt.bar(['Predicted Price'], [predicted_price[0]], color='blue')
+    plt.scatter(df['area'], df['price'], color='gray', label='Actual Prices', alpha=0.5)  # แสดงราคาจริง
+    plt.scatter(area, predicted_price, color='blue', s=100, label='Predicted Price')  # แสดงราคาที่คาดการณ์
+    plt.xlabel('Area (square meters)')
     plt.ylabel('Price (Baht)')
-    plt.title('Predicted House Price Based on Area')
+    plt.title('House Price Prediction Based on Area')
+    plt.xlim(0, df['area'].max() * 1.2)  # ขยายขอบเขต X-axis
     plt.ylim(0, predicted_price[0] * 1.2)  # ขยายขอบเขต Y-axis
-    plt.grid(axis='y')
+    plt.grid()
+    plt.legend()
 
     # แสดงกราฟใน Streamlit
     st.pyplot(plt)
