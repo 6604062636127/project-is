@@ -1,7 +1,4 @@
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.metrics import mean_absolute_error, mean_absolute_percentage_error
 import pickle
 import streamlit as st
 
@@ -15,17 +12,6 @@ def load_model():
 def predict_price(model, input_data):
     predicted_price = model.predict(input_data)
     return predicted_price
-
-# ฟังก์ชันสำหรับการสร้างกราฟ
-def plot_results(y_test, predicted_prices):
-    plt.figure(figsize=(12, 6))
-    sns.scatterplot(x=y_test, y=predicted_prices)
-    plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--')  # เส้น 45 องศา
-    plt.xlabel('ราคาจริง (บาท)')
-    plt.ylabel('ราคาที่ทำนาย (บาท)')
-    plt.title('การเปรียบเทียบราคาจริงกับราคาที่ทำนาย')
-    plt.grid()
-    st.pyplot(plt)
 
 # สร้าง UI สำหรับ Streamlit
 st.title("การทำนายราคาอสังหาริมทรัพย์")
@@ -55,5 +41,5 @@ input_data = pd.get_dummies(input_data, drop_first=True)
 # สร้างปุ่มทำนายราคา
 if st.button("ทำนายราคา"):
     # ทำการทำนายราคาโดยใช้โมเดลที่เตรียมไว้
-    predicted_price = model.predict(input_data)  # ใช้ข้อมูลที่สร้างขึ้น
+    predicted_price = predict_price(model, input_data)  # ใช้ข้อมูลที่สร้างขึ้น
     st.write(f"ราคาที่คาดการณ์: {predicted_price[0]:.2f} บาท")
