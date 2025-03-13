@@ -10,21 +10,19 @@ with open('random_forest_model.pkl', 'rb') as file:
 st.title("House Price Prediction App")
 
 # ส่วนสำหรับการป้อนข้อมูล
-st.header("Input Features")
+st.header("Input Feature")
 
-# ป้อนข้อมูลพื้นที่
-area = st.number_input("Area (in square meters)", min_value=0.0)
-
-# ป้อนข้อมูลฟีเจอร์อื่น ๆ ตามที่จำเป็น
-# ตัวอย่างเช่น:
-# num_bedrooms = st.number_input("Number of Bedrooms", min_value=0)
-# num_bathrooms = st.number_input("Number of Bathrooms", min_value=0)
+# ป้อนข้อมูลพื้นที่บ้าน
+area = st.number_input("Area of the house (in square meters)", min_value=0.0)
 
 # สร้าง DataFrame สำหรับข้อมูลที่ป้อน
 input_data = pd.DataFrame({
-    'area': [area],
-    # เพิ่มฟีเจอร์อื่น ๆ ที่คุณต้องการที่นี่
+    'area': [area]
 })
+
+# ตรวจสอบให้แน่ใจว่า DataFrame มีฟีเจอร์ทั้งหมดที่โมเดลต้องการ
+model_columns = model.feature_names_in_
+input_data = input_data.reindex(columns=model_columns, fill_value=0)
 
 # ปุ่มสำหรับการทำนายราคา
 if st.button("Predict Price"):
