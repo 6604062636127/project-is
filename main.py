@@ -2,28 +2,24 @@ import streamlit as st
 import pandas as pd
 import pickle
 
-# Load the model
+# โหลดโมเดล Random Forest
 with open('random_forest_model.pkl', 'rb') as file:
     model = pickle.load(file)
 
-# Streamlit UI
-st.title("Housing Prices Prediction")
-st.write("Enter the details below:")
+# สร้าง UI สำหรับ Streamlit
+st.title("การทำนายราคาบ้าน")
+st.write("กรุณากรอกข้อมูลพื้นที่ (ตารางเมตร) เพื่อทำนายราคา:")
 
-# Input fields
-area = st.number_input("Area (in square meters)", min_value=0.0, value=100.0)
-bedrooms = st.number_input("Number of Bedrooms", min_value=0, value=1)
-bathrooms = st.number_input("Number of Bathrooms", min_value=0, value=1)
+# Input field for area in square meters
+area_m2 = st.number_input("พื้นที่ (ตารางเมตร)", min_value=0.0, value=30.0)
 
 # Button to make prediction
-if st.button("Predict Price"):
-    input_data = pd.DataFrame({
-        'area': [area],
-        'bedrooms': [bedrooms],
-        'bathrooms': [bathrooms],
-        # Add other features as necessary
-    })
+if st.button("ทำนาย"):
+    # แปลงพื้นที่เป็น DataFrame
+    input_data = pd.DataFrame({'area': [area_m2]})
 
-    # Make prediction
+    # ทำนายราคาบ้าน
     predicted_price = model.predict(input_data)
-    st.write(f"Predicted Price: {predicted_price[0]:,.2f} Baht")
+
+    # แสดงผลลัพธ์
+    st.write(f"ราคาที่คาดการณ์: {predicted_price[0]:,.2f} บาท")
