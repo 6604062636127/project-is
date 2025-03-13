@@ -68,9 +68,16 @@ st.write(f'Mean Absolute Percentage Error (MAPE): {mape:.2%}')
 
 # สร้างปุ่มทำนายราคา
 if st.button("ทำนายราคา"):
+    # สร้าง DataFrame สำหรับข้อมูลที่ป้อนเข้า
+    input_data = pd.DataFrame({
+        'area': [area_in_square_meters],
+        # เพิ่มฟีเจอร์อื่น ๆ ที่โมเดลต้องการที่นี่
+        # เช่น bedrooms, bathrooms, stories, mainroad, guestroom, basement, hotwaterheating, airconditioning, parking, prefarea, furnishingstatus
+    })
+
+    # แปลงฟีเจอร์เชิงหมวดหมู่เป็นตัวเลข
+    input_data = pd.get_dummies(input_data, drop_first=True)
+
     # ทำการทำนายราคาโดยใช้โมเดลที่เตรียมไว้
-    predicted_price = model.predict([[area_in_square_meters]])  # ใช้พื้นที่บ้านที่แปลงแล้ว
-    st.write(f"ราคาที่คาดการณ์: {predicted_price[0]:.2f} บาท")
-    
-    # แสดงกราฟการทำนาย
-    plot_results(y, predicted_prices)  # แสดงกราฟราคาที่ทำนาย
+    predicted_price = model.predict(input_data)  # ใช้ข้อมูลที่สร้างขึ้น
+   
