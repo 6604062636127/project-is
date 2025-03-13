@@ -66,5 +66,11 @@ mape = mean_absolute_percentage_error(y, predicted_prices)
 st.write(f'Mean Absolute Error (MAE): {mae:.2f} บาท')
 st.write(f'Mean Absolute Percentage Error (MAPE): {mape:.2%}')
 
-# สร้างกราฟ
-plot_results(y, predicted_prices)
+# สร้างปุ่มทำนายราคา
+if st.button("ทำนายราคา"):
+    # ทำการทำนายราคาโดยใช้โมเดลที่เตรียมไว้
+    predicted_price = model.predict([[area_in_square_meters]])  # ใช้พื้นที่บ้านที่แปลงแล้ว
+    st.write(f"ราคาที่คาดการณ์: {predicted_price[0]:.2f} บาท")
+    
+    # แสดงกราฟการทำนาย
+    plot_results(y, predicted_prices)  # แสดงกราฟราคาที่ทำนาย
