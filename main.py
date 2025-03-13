@@ -2,34 +2,28 @@ import streamlit as st
 import pandas as pd
 import pickle
 
-# โหลดโมเดล Random Forest
+# Load the model
 with open('random_forest_model.pkl', 'rb') as file:
     model = pickle.load(file)
 
-# สร้าง UI สำหรับ Streamlit
-st.title("การทำนายราคาอสังหาริมทรัพย์")
-st.write("กรุณากรอกข้อมูลพื้นที่ (ตารางเมตร) เพื่อทำนายราคา:")
+# Streamlit UI
+st.title("Housing Prices Prediction")
+st.write("Enter the details below:")
 
-# Input field for area in square meters
-area_m2 = st.number_input("พื้นที่ (ตารางเมตร)", min_value=0.0, value=30.0)
-
-# แปลงตารางเมตรเป็นตารางฟุต
-area_ft2 = area_m2 * 10.7639
+# Input fields
+area = st.number_input("Area (in square meters)", min_value=0.0, value=100.0)
+bedrooms = st.number_input("Number of Bedrooms", min_value=0, value=1)
+bathrooms = st.number_input("Number of Bathrooms", min_value=0, value=1)
 
 # Button to make prediction
-if st.button("ทำนาย"):
-    # เตรียมข้อมูลสำหรับการทำนาย
-    input_data = pd.DataFrame({'area': [area_ft2]})  # ใช้พื้นที่ในตารางฟุต
-    
-    # ตรวจสอบฟีเจอร์ที่โมเดลต้องการ
-    model_features = model.feature_names_in_
-    for feature in model_features:
-        if feature not in input_data.columns:
-            input_data[feature] = 0  # เพิ่มฟีเจอร์ที่ขาดหายไปด้วยค่า 0
-    input_data = input_data[model_features]
+if st.button("Predict Price"):
+    input_data = pd.DataFrame({
+        'area': [area],
+        'bedrooms': [bedrooms],
+        'bathrooms': [bathrooms],
+        # Add other features as necessary
+    })
 
-    # ทำนายราคาบ้าน
+    # Make prediction
     predicted_price = model.predict(input_data)
-
-    # แสดงผลลัพธ์
-    st.write(f"ราคาที่คาดการณ์: {predicted_price[0]:,.2f} บาท")
+    st.write(f"Predicted Price: {predicted_price[0]:,.2f} Baht")
