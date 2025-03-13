@@ -8,15 +8,18 @@ with open('random_forest_model.pkl', 'rb') as file:
 
 # สร้าง UI สำหรับ Streamlit
 st.title("การทำนายราคาอสังหาริมทรัพย์")
-st.write("กรุณากรอกข้อมูลพื้นที่เพื่อทำนายราคา:")
+st.write("กรุณากรอกข้อมูลพื้นที่ (ตารางเมตร) เพื่อทำนายราคา:")
 
-# Input field for area
-area = st.number_input("พื้นที่ (ตารางฟุต)", min_value=0, value=3000)
+# Input field for area in square meters
+area_m2 = st.number_input("พื้นที่ (ตารางเมตร)", min_value=0.0, value=30.0)
+
+# แปลงตารางเมตรเป็นตารางฟุต
+area_ft2 = area_m2 * 10.7639
 
 # Button to make prediction
 if st.button("ทำนาย"):
     # เตรียมข้อมูลสำหรับการทำนาย
-    input_data = pd.DataFrame({'area': [area]})
+    input_data = pd.DataFrame({'area': [area_ft2]})  # ใช้พื้นที่ในตารางฟุต
     
     # ตรวจสอบฟีเจอร์ที่โมเดลต้องการ
     model_features = model.feature_names_in_
