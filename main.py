@@ -30,8 +30,9 @@ def plot_results(y_test, predicted_prices):
 # สร้าง UI สำหรับ Streamlit
 st.title("การทำนายราคาอสังหาริมทรัพย์")
 
-# รับข้อมูลจากผู้ใช้
+# รับข้อมูลพื้นที่บ้านจากผู้ใช้
 area_input = st.number_input("กรุณากรอกพื้นที่บ้าน (ตารางฟุต)", min_value=0.0)
+
 # แปลงพื้นที่จากตารางฟุตเป็นตารางเมตร
 area_in_square_meters = area_input * 0.092903
 
@@ -44,7 +45,12 @@ model = load_model()
 # สร้าง DataFrame สำหรับข้อมูลที่ป้อนเข้า
 input_data = pd.DataFrame({
     'area': [area_in_square_meters],
+    # เพิ่มฟีเจอร์อื่น ๆ ที่โมเดลต้องการที่นี่
+    # เช่น bedrooms, bathrooms, stories, mainroad, guestroom, basement, hotwaterheating, airconditioning, parking, prefarea, furnishingstatus
 })
+
+# แปลงฟีเจอร์เชิงหมวดหมู่เป็นตัวเลข
+input_data = pd.get_dummies(input_data, drop_first=True)
 
 # สร้างปุ่มทำนายราคา
 if st.button("ทำนายราคา"):
