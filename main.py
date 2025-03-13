@@ -1,45 +1,35 @@
+import streamlit as st
 import pandas as pd
 import pickle
-import streamlit as st
 
-# ฟังก์ชันสำหรับการโหลดโมเดล
-def load_model():
-    with open('random_forest_model.pkl', 'rb') as file:
-        model = pickle.load(file)
-    return model
+# โหลดโมเดลที่ถูกฝึกไว้
+with open('random_forest_model.pkl', 'rb') as file:
+    model = pickle.load(file)
 
-# ฟังก์ชันสำหรับการทำนาย
-def predict_price(model, input_data):
-    predicted_price = model.predict(input_data)
-    return predicted_price
+# ชื่อของแอปพลิเคชัน
+st.title("House Price Prediction App")
 
-# สร้าง UI สำหรับ Streamlit
-st.title("การทำนายราคาอสังหาริมทรัพย์")
+# ส่วนสำหรับการป้อนข้อมูล
+st.header("Input Features")
 
-# รับข้อมูลพื้นที่บ้านจากผู้ใช้
-area_input = st.number_input("กรุณากรอกพื้นที่บ้าน (ตารางฟุต)", min_value=0.0)
+# ป้อนข้อมูลพื้นที่
+area = st.number_input("Area (in square meters)", min_value=0.0)
 
-# แปลงพื้นที่จากตารางฟุตเป็นตารางเมตร
-area_in_square_meters = area_input * 0.092903
+# ป้อนข้อมูลฟีเจอร์อื่น ๆ ตามที่จำเป็น
+# ตัวอย่างเช่น:
+# num_bedrooms = st.number_input("Number of Bedrooms", min_value=0)
+# num_bathrooms = st.number_input("Number of Bathrooms", min_value=0)
 
-# แสดงพื้นที่ที่แปลงแล้ว
-st.write(f"พื้นที่บ้านที่แปลงเป็นตารางเมตร: {area_in_square_meters:.2f} ตารางเมตร")
-
-# โหลดโมเดล
-model = load_model()
-
-# สร้าง DataFrame สำหรับข้อมูลที่ป้อนเข้า
+# สร้าง DataFrame สำหรับข้อมูลที่ป้อน
 input_data = pd.DataFrame({
-    'area': [area_in_square_meters],
-    # เพิ่มฟีเจอร์อื่น ๆ ที่โมเดลต้องการที่นี่
-    # เช่น bedrooms, bathrooms, stories, mainroad, guestroom, basement, hotwaterheating, airconditioning, parking, prefarea, furnishingstatus
+    'area': [area],
+    # เพิ่มฟีเจอร์อื่น ๆ ที่คุณต้องการที่นี่
 })
 
-# แปลงฟีเจอร์เชิงหมวดหมู่เป็นตัวเลข
-input_data = pd.get_dummies(input_data, drop_first=True)
+# ปุ่มสำหรับการทำนายราคา
+if st.button("Predict Price"):
+    predicted_price = model.predict(input_data)
+    st.write(f"The predicted house price is: {predicted_price[0]:.2f} บาท")
 
-# สร้างปุ่มทำนายราคา
-if st.button("ทำนายราคา"):
-    # ทำการทำนายราคาโดยใช้โมเดลที่เตรียมไว้
-    predicted_price = predict_price(model, input_data)  # ใช้ข้อมูลที่สร้างขึ้น
-    st.write(f"ราคาที่คาดการณ์: {predicted_price[0]:.2f} บาท")
+# ข้อความแนะนำ
+st.write("กรุณากรอกข้อมูลด้านบนและคลิก 'Predict Price' เพื่อดูราคาที่คาดการณ์ไว้.")
