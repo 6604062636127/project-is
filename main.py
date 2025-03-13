@@ -32,18 +32,6 @@ st.title("การทำนายราคาอสังหาริมทร�
 
 # รับข้อมูลจากผู้ใช้
 area_input = st.number_input("กรุณากรอกพื้นที่บ้าน (ตารางฟุต)", min_value=0.0)
-bedrooms = st.number_input("จำนวนห้องนอน", min_value=0, value=3)
-bathrooms = st.number_input("จำนวนห้องน้ำ", min_value=0, value=2)
-stories = st.number_input("จำนวนชั้น", min_value=1, value=1)
-mainroad = st.selectbox("อยู่ใกล้ถนนหลักหรือไม่", ['yes', 'no'])
-guestroom = st.selectbox("มีห้องแขกหรือไม่", ['yes', 'no'])
-basement = st.selectbox("มีชั้นใต้ดินหรือไม่", ['yes', 'no'])
-hotwaterheating = st.selectbox("มีระบบน้ำร้อนหรือไม่", ['yes', 'no'])
-airconditioning = st.selectbox("มีเครื่องปรับอากาศหรือไม่", ['yes', 'no'])
-parking = st.number_input("จำนวนที่จอดรถ", min_value=0, value=1)
-prefarea = st.selectbox("อยู่ในพื้นที่ที่ต้องการหรือไม่", ['yes', 'no'])
-furnishingstatus = st.selectbox("สถานะการตกแต่ง", ['furnished', 'semi-furnished', 'unfurnished'])
-
 # แปลงพื้นที่จากตารางฟุตเป็นตารางเมตร
 area_in_square_meters = area_input * 0.092903
 
@@ -56,21 +44,7 @@ model = load_model()
 # สร้าง DataFrame สำหรับข้อมูลที่ป้อนเข้า
 input_data = pd.DataFrame({
     'area': [area_in_square_meters],
-    'bedrooms': [bedrooms],
-    'bathrooms': [bathrooms],
-    'stories': [stories],
-    'mainroad': [mainroad],
-    'guestroom': [guestroom],
-    'basement': [basement],
-    'hotwaterheating': [hotwaterheating],
-    'airconditioning': [airconditioning],
-    'parking': [parking],
-    'prefarea': [prefarea],
-    'furnishingstatus': [furnishingstatus]
 })
-
-# แปลงฟีเจอร์เชิงหมวดหมู่เป็นตัวเลข
-input_data = pd.get_dummies(input_data, drop_first=True)
 
 # สร้างปุ่มทำนายราคา
 if st.button("ทำนายราคา"):
