@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import pickle
+import matplotlib.pyplot as plt
 
 # โหลดโมเดลที่ถูกฝึกไว้
 with open('random_forest_model.pkl', 'rb') as file:
@@ -28,6 +29,20 @@ input_data = input_data.reindex(columns=model_columns, fill_value=0)
 if st.button("Predict Price"):
     predicted_price = model.predict(input_data)
     st.write(f"The predicted house price is: {predicted_price[0]:.2f} บาท")
+
+    # แสดงกราฟ
+    st.subheader("Price Prediction Visualization")
+    
+    # สร้างกราฟ
+    plt.figure(figsize=(10, 5))
+    plt.bar(['Predicted Price'], [predicted_price[0]], color='blue')
+    plt.ylabel('Price (Baht)')
+    plt.title('Predicted House Price Based on Area')
+    plt.ylim(0, predicted_price[0] * 1.2)  # ขยายขอบเขต Y-axis
+    plt.grid(axis='y')
+
+    # แสดงกราฟใน Streamlit
+    st.pyplot(plt)
 
 # ข้อความแนะนำ
 st.write("กรุณากรอกข้อมูลด้านบนและคลิก 'Predict Price' เพื่อดูราคาที่คาดการณ์ไว้.")
