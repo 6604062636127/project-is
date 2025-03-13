@@ -48,7 +48,7 @@ st.title("การทำนายราคาอสังหาริมทร�
 st.write("กรุณากรอกข้อมูลฟีเจอร์เพื่อทำนายราคา:")
 
 # Input fields
-area = st.number_input("พื้นที่ (ตารางฟุต)", min_value=1000, value=9999)  # ตั้งค่าต่ำสุดเป็น 2000
+area = st.number_input("พื้นที่ (ตารางฟุต)", min_value=500, value=500)  # ตั้งค่าต่ำสุดเป็น 500
 bedrooms = st.number_input("จำนวนห้องนอน", min_value=0, value=0)
 bathrooms = st.number_input("จำนวนห้องน้ำ", min_value=0, value=0)
 stories = st.number_input("จำนวนชั้น", min_value=0, value=0)
@@ -64,4 +64,9 @@ furnishingstatus = st.selectbox("สถานะการตกแต่ง", ["
 # Button to make prediction
 if st.button("ทำนาย"):
     price_prediction = predict_price(area, bedrooms, bathrooms, stories, mainroad, guestroom, basement, hotwaterheating, airconditioning, parking, prefarea, furnishingstatus)
-    st.write(f"ราคาที่คาดการณ์: {price_prediction :.2f} บาท")
+    
+    # ตรวจสอบว่าราคาที่คาดการณ์เป็น 0.0 หรือไม่
+    if price_prediction <= 0.0:
+        st.write("ไม่มีราคา")
+    else:
+        st.write(f"ราคาที่คาด การณ์: {price_prediction:.2f} บาท")
