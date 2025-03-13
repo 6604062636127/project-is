@@ -4,7 +4,6 @@ import pickle
 
 # โหลดโมเดลที่บันทึกไว้
 with open('random_forest_model.pkl', 'rb') as file:
-    model = pickle.load(file)
 
 # สร้างส่วนติดต่อผู้ใช้
 st.title("การทำนายราคาอสังหาริมทรัพย์")
