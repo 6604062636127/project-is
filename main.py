@@ -29,38 +29,33 @@ def plot_results(y_test, predicted_prices):
 
 # สร้าง UI สำหรับ Streamlit
 st.title("การทำนายราคาอสังหาริมทรัพย์")
-st.write("กรุณาอัปโหลดไฟล์ Housing.csv เพื่อเริ่มต้น")
 
-# อัปโหลดไฟล์ CSV
-uploaded_file = st.file_uploader("เลือกไฟล์ Housing.csv", type=["csv"])
+# อ่านข้อมูลจากไฟล์ CSV โดยตรง
+df = pd.read_csv('Housing.csv')
 
-if uploaded_file is not None:
-    # อ่านข้อมูลจากไฟล์ CSV
-    df = pd.read_csv(uploaded_file)
+# แปลงพื้นที่จากตารางฟุตเป็นตารางเมตร
+df['area'] = df['area'] * 0.092903
 
-    # แปลงพื้นที่จากตารางฟุตเป็นตารางเมตร
-    df['area'] = df['area'] * 0.092903
+# เตรียมข้อมูล
+X = df.drop('price', axis=1)  # ฟีเจอร์ทั้งหมด ยกเว้นราคา
+y = df['price']  # ราคาบ้าน
 
-    # เตรียมข้อมูล
-    X = df.drop('price', axis=1)  # ฟีเจอร์ทั้งหมด ยกเว้นราคา
-    y = df['price']  # ราคาบ้าน
+# แปลงฟีเจอร์เชิงหมวดหมู่เป็นตัวเลข
+X = pd.get_dummies(X, drop_first=True)
 
-    # แปลงฟีเจอร์เชิงหมวดหมู่เป็นตัวเลข
-    X = pd.get_dummies(X, drop_first=True)
+# โหลดโมเดล
+model = load_model()
 
-    # โหลดโมเดล
-    model = load_model()
+# ทำนายราคาบ้าน
+predicted_prices = predict_price(model, X)
 
-    # ทำนายราคาบ้าน
-    predicted_prices = predict_price(model, X)
+# คำนวณค่าความผิดพลาด
+mae = mean_absolute_error(y, predicted_prices)
+mape = mean_absolute_percentage_error(y, predicted_prices)
 
-    # คำนวณค่าความผิดพลาด
-    mae = mean_absolute_error(y, predicted_prices)
-    mape = mean_absolute_percentage_error(y, predicted_prices)
+# แสดงผลลัพธ์
+st.write(f'Mean Absolute Error (MAE): {mae:.2f} บาท')
+st.write(f'Mean Absolute Percentage Error (MAPE): {mape:.2%}')
 
-    # แสดงผลลัพธ์
-    st.write(f'Mean Absolute Error (MAE): {mae:.2f} บาท')
-    st.write(f'Mean Absolute Percentage Error (MAPE): {mape:.2%}')
-
-    # สร้างกราฟ
-    plot_results(y, predicted_prices)
+# สร้างกราฟ
+plot_results(y, predicted_prices)
