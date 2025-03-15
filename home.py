@@ -3,7 +3,6 @@ from navbar import navbar  # นำเข้า Navbar
 from neural_network import doc2
 
 from machine_learning import doc1
-from machine_learning import ML
 
 # เรียกใช้ Navbar
 navbar()
