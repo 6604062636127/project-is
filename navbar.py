@@ -47,10 +47,10 @@ def navbar():
     # สร้าง Navbar
     st.markdown("""
         <div class="navbar">
-            <a href="/?page=Home" target="_self" class="active">Home</a>
-            <a href="/?page=Doc1" target="_self">Document ML</a>
-            <a href="/?page=Doc2" target="_self">Demo Machine Learning</a>
-            <a href="/?page=ML" target="_self">Document NN</a>
-            <a href="/?page=NN" target="_self">Neural Network</a>
+            <a href="/?page=Home" target="_self" class="active">🛖</a>
+            <a href="/?page=Doc1" target="_self">Doc ML</a>
+            <a href="/?page=Doc2" target="_self">Demo ML</a>
+            <a href="/?page=ML" target="_self">Doc NN</a>
+            <a href="/?page=NN" target="_self">Demo NN</a>
         </div>
     """, unsafe_allow_html=True)
