@@ -7,12 +7,7 @@ def main():
 
     st.title("หน้าแรก")
     st.write("ยินดีต้อนรับสู่หน้าแรกของแอป Streamlit ของคุณ!")
-
-if __name__ == "__main__":
-    main()
-    st.title("หน้าแรก")
-    st.write("ยินดีต้อนรับสู่หน้าแรกของแอป Streamlit ของคุณ!")
-
+    
     # ลิงก์ไปยังหน้าอื่น
     if st.button("ไปยังหน้า 1"):
         st.session_state.page = "page1"
