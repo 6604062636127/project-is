@@ -11,6 +11,7 @@ navbar()
 # อ่านค่าพารามิเตอร์จาก URL
 query_params = st.query_params
 page = query_params.get("page", "Home") 
+st.session_state["page"] = page
 
 # แสดงหน้าที่เลือก
 if page == "Home":
