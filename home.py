@@ -1,11 +1,15 @@
 import streamlit as st
+from navbar import navbar
 
 def app():
-    st.title("Intelligence System")
-    st.write("Welcome to our project!")
-import streamlit as st
-
 def main():
+    navbar()  # เรียกใช้ฟังก์ชัน navbar
+
+    st.title("หน้าแรก")
+    st.write("ยินดีต้อนรับสู่หน้าแรกของแอป Streamlit ของคุณ!")
+
+if __name__ == "__main__":
+    main()
     st.title("หน้าแรก")
     st.write("ยินดีต้อนรับสู่หน้าแรกของแอป Streamlit ของคุณ!")
 
