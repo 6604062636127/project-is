@@ -67,7 +67,6 @@ def app():
         )
 
         st.markdown("<br>", unsafe_allow_html=True)
-        # ใช้ HTML และ CSS เพื่อจัดปุ่มให้อยู่ตรงกลาง
         st.markdown(
             """
             <style>
