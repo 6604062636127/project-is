@@ -13,12 +13,12 @@ page = query_params.get("page", "Home")  # Default to "Home"
 # แสดงหน้าที่เลือก
 if page == "Home":
     home.app()
-elif page == "Doc1":
+elif page == "Document ML":
     doc1.app()
-elif page == "Doc2":
+elif page == "Document NN":
     doc2.app()
-elif page == "ML":
+elif page == "Demo ML":
     ML.app()
-elif page == "NN":
+elif page == "Demo NN":
     NN.app()
 
