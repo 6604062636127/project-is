@@ -16,11 +16,11 @@ st.session_state["page"] = page
 # แสดงหน้าที่เลือก
 if page == "Home":
     st.title("Home Page")
-elif page == "Doc1":
-    app_doc1()  # เรียกใช้ app จาก doc1
-elif page == "Doc2":
-    app_doc2()  # เรียกใช้ app จาก doc2
 elif page == "ML":
-    app_ml()  # เรียกใช้ app จาก ML
+    app_doc1()  # เรียกใช้ app จาก doc1
 elif page == "NN":
+    app_doc2()  # เรียกใช้ app จาก doc2
+elif page == "Demo ML":
+    app_ml()  # เรียกใช้ app จาก ML
+elif page == "Demo NN":
     app_nn()  # เรียกใช้ app จาก NN
