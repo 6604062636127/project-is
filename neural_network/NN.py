@@ -12,11 +12,9 @@ file_path = "gender_classification2_model.tflite"
 
 if os.path.exists(file_path):
     file_size = os.path.getsize(file_path) / (1024 * 1024)  # แปลงเป็น MB
-    print(f"📏 ขนาดไฟล์ .tflite: {file_size:.2f} MB")
+    st.write(f"📏 ขนาดไฟล์ .tflite: {file_size:.2f} MB")
 else:
-    print("❌ ไม่พบไฟล์ .tflite")
-
-
+    st.error("❌ ไม่พบไฟล์ .tflite")
 
 # โหลดโมเดล .tflite
 interpreter = tf.lite.Interpreter(model_path=file_path)
@@ -92,5 +90,3 @@ def app():
                 """,
                 unsafe_allow_html=True
             )
-
-
