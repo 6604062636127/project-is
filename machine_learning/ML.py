@@ -3,12 +3,12 @@ import pandas as pd
 import pickle
 import matplotlib.pyplot as plt
 
+def app():
+    st.title("House Price Prediction App")
+    st.header("Input Feature")
 with open('random_forest_model.pkl', 'rb') as file:
     model = pickle.load(file)
 df = pd.read_csv('Housing.csv')
-st.title("House Price Prediction App")
-st.header("Input Feature")
-
 area = st.number_input("Area of the house (in square meters)", min_value=0.0)
 
 input_data = pd.DataFrame({
