@@ -29,10 +29,10 @@ def navbar():
     st.markdown("""
         <div class="navbar">
             <a href="/?page=Home" target="_self">Home</a>
-            <a href="/?page=Doc1" target="_self">Doc1</a>
-            <a href="/?page=Doc2" target="_self">Doc2</a>
-            <a href="/?page=ML" target="_self">ML</a>
-            <a href="/?page=NN" target="_self">NN</a>
+            <a href="/?page=Doc1" target="_self">Document ML</a>
+            <a href="/?page=Doc2" target="_self">Demo Machine Learning</a>
+            <a href="/?page=ML" target="_self">Document NN</a>
+            <a href="/?page=NN" target="_self">Nueral Network</a>
         </div>
     """, unsafe_allow_html=True)
 
