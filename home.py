@@ -1,7 +1,6 @@
 import streamlit as st
 from navbar import navbar  # นำเข้า Navbar
-from machine_learning import doc1, ML  # นำเข้าหน้าในโฟลเดอร์ machine_learning
-from neural_network import doc2, NN  # นำเข้าหน้าในโฟลเดอร์ neural_network
+from ..machine_learning import doc1  # นำเข้าจากโฟลเดอร์ machine_learningfrom neural_network import doc2, NN  # นำเข้าหน้าในโฟลเดอร์ neural_network
 
 # เรียกใช้ Navbar
 navbar()
