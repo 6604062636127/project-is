@@ -1,6 +1,6 @@
 import streamlit as st
 from navbar import navbar  # นำเข้า Navbar
-from nueral_network import doc2
+from neural_network import doc2
 
 # เรียกใช้ Navbar
 navbar()
