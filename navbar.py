@@ -1,5 +1,4 @@
 import streamlit as st
-def app():
 def navbar():
     # CSS สำหรับ Navbar แนวนอน
     st.markdown("""
