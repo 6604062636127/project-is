@@ -4,7 +4,7 @@ def navbar():
     st.markdown("""
         <style>
             .navbar {
-                background-color: #4CAF50; /* สีพื้นหลัง */
+                background-color: #2196F3; /* สีพื้นหลังฟ้า */
                 overflow: hidden;
                 display: flex;
                 justify-content: center;
