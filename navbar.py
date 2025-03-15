@@ -3,30 +3,42 @@ def navbar():
     # CSS สำหรับ Navbar แนวนอน
     st.markdown("""
         <style>
+            /* Navbar หลัก */
             .navbar {
-                background-color: #2196F3; /* สีพื้นหลังฟ้า */
+                background-color: #1E3A8A; /* สีพื้นหลังฟ้าเข้ม */
                 overflow: hidden;
                 display: flex;
                 justify-content: center;
-                padding: 10px;
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* เงา */
-                border-radius: 5px; /* มุมมน */
+                align-items: center;
+                padding: 12px 20px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เงาสวยงาม */
+                border-radius: 8px; /* มุมมน */
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             }
+
+            /* ลิงก์ใน Navbar */
             .navbar a {
                 color: white;
                 text-decoration: none;
-                padding: 14px 20px;
+                padding: 12px 24px;
                 font-size: 18px;
-                font-weight: bold;
-                transition: background-color 0.3s; /* การเปลี่ยนสีพื้นหลัง */
-            }
-            .navbar a:hover {
-                background-color: #2196F3; /* สีพื้นหลังเมื่อ hover เป็นสีฟ้า */
-                border-radius: 5px;
+                font-weight: 500;
+                border-radius: 6px;
+                margin: 0 10px;
+                transition: background-color 0.3s, transform 0.3s; /* การเปลี่ยนสีพื้นหลังและการแสดงผล */
             }
 
+            /* ลิงก์เมื่อ Hover */
+            .navbar a:hover {
+                background-color: #4CAF50; /* สีพื้นหลังเมื่อ hover */
+                transform: scale(1.1); /* ขยายเล็กน้อยเมื่อ hover */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* เพิ่มเงาเมื่อ hover */
+            }
+
+            /* ลิงก์ที่กำลังใช้งาน */
             .navbar a.active {
-                background-color: #1976D2; /* สีพื้นหลังสำหรับลิงก์ที่ใช้งานอยู่ (สีน้ำเงินฟ้าจาง) */
+                background-color: #3B82F6; /* สีพื้นหลังสำหรับลิงก์ที่ใช้งานอยู่ (สีน้ำเงิน) */
+                font-weight: bold;
             }
 
         </style>
