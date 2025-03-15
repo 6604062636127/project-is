@@ -9,8 +9,8 @@ from NN import app as app_nn  # นำเข้าฟังก์ชัน app()
 navbar()
 
 # อ่านค่าพารามิเตอร์จาก URL
-query_params = st.experimental_get_query_params()  # ใช้ experimental_get_query_params()
-page = query_params.get("page", ["Home"])[0]  # Default to "Home"
+query_params = st.query_params
+page = query_params.get("page", "Home") 
 
 # แสดงหน้าที่เลือก
 if page == "Home":
