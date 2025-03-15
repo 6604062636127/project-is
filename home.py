@@ -1,6 +1,6 @@
 import streamlit as st
 from navbar import navbar  # นำเข้า Navbar
-from project_is.machine_learning import doc1
+from machine_learning import doc1
 
 # เรียกใช้ Navbar
 navbar()
