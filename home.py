@@ -1,31 +1,24 @@
 import streamlit as st
-from navbar import navbar  # import ฟังก์ชัน navbar
+from navbar import navbar  # นำเข้า Navbar
+from machine_learning import doc1, ML  # นำเข้าหน้าในโฟลเดอร์ machine_learning
+from neural_network import doc2, NN  # นำเข้าหน้าในโฟลเดอร์ neural_network
 
-# ฟังก์ชันหลักที่แสดงหน้าแรก
-def main():
-    navbar()  # เรียกใช้ฟังก์ชัน navbar
+# เรียกใช้ Navbar
+navbar()
 
-# ฟังก์ชันเพื่อแสดงการทำงานของหน้าเว็บตาม session_state.page
-def app():
-    if "page" not in st.session_state:
-        st.session_state.page = "home"  # ตั้งค่าเริ่มต้นหน้าเป็น "home"
+# อ่านค่าพารามิเตอร์จาก URL
+query_params = st.query_params
+page = query_params.get("page", "Home")  # Default to "Home"
 
-    # ตรวจสอบว่าหน้าปัจจุบันคือหน้าไหน
-    if st.session_state.page == "home":
-        main()  # เรียกฟังก์ชัน main
-    elif st.session_state.page == "page1":
-        st.title("หน้า 1")
-        st.write("คุณอยู่ในหน้า 1")
-    elif st.session_state.page == "page2":
-        st.title("หน้า 2")
-        st.write("คุณอยู่ในหน้า 2")
-    elif st.session_state.page == "page3":
-        st.title("หน้า 3")
-        st.write("คุณอยู่ในหน้า 3")
-    elif st.session_state.page == "page4":
-        st.title("หน้า 4")
-        st.write("คุณอยู่ในหน้า 4")
+# แสดงหน้าที่เลือก
+if page == "Home":
+    home.app()
+elif page == "Doc1":
+    doc1.app()
+elif page == "Doc2":
+    doc2.app()
+elif page == "ML":
+    ML.app()
+elif page == "NN":
+    NN.app()
 
-# เรียกใช้ฟังก์ชัน app()
-if __name__ == "__main__":
-    app()
