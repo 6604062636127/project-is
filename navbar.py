@@ -21,12 +21,14 @@ def navbar():
                 transition: background-color 0.3s; /* การเปลี่ยนสีพื้นหลัง */
             }
             .navbar a:hover {
-                background-color: #45a049; /* สีพื้นหลังเมื่อ hover */
+                background-color: #2196F3; /* สีพื้นหลังเมื่อ hover เป็นสีฟ้า */
                 border-radius: 5px;
             }
+
             .navbar a.active {
-                background-color: #3e8e41; /* สีพื้นหลังสำหรับลิงก์ที่ใช้งานอยู่ */
+                background-color: #1976D2; /* สีพื้นหลังสำหรับลิงก์ที่ใช้งานอยู่ (สีน้ำเงินฟ้าจาง) */
             }
+
         </style>
     """, unsafe_allow_html=True)
 
