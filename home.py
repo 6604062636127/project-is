@@ -1,5 +1,5 @@
 import streamlit as st
 
 def app():
-    st.title("Home Page")
-    st.write("Welcome to the Home Page!")
+    st.title("Intelligence System")
+    st.write("Welcome to our project!")
