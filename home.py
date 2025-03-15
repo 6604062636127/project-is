@@ -1,7 +1,7 @@
 import streamlit as st
 from navbar import navbar  # นำเข้า Navbar
 from neural_network import doc2
-
+from NN import app as NN_app
 from machine_learning import doc1
 
 # เรียกใช้ Navbar
@@ -20,5 +20,5 @@ elif page == "Document NN":
 elif page == "Demo ML":
     ML.app()
 elif page == "Demo NN":
-    NN.app()
+    NN_app()
 
