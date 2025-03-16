@@ -14,3 +14,8 @@
 ## Dataset ของ Neuron network 
   - (Gender_classification2.ipynb)
   - มี link dataset คือ https://www.kaggle.com/datasets/humairmunir/gender-recognizer และได้ทำการ แยกไฟล์อยู่ข้างในแล้ว
+
+ ## ผู้จัดทำ
+  - 6604062636127 น.ส.ซีตีฮาย๊าต วรวัฒนาชัย
+  - 6604062636135 น.ส.ฐาปณี ศิริพละ
+    
