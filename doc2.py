@@ -1,7 +1,84 @@
 import streamlit as st
 
 def app():
-    
+    # การปรับแต่งสไตล์ให้ทันสมัยและอ่านง่าย
+    st.markdown("""
+        <style>
+            /* พื้นหลัง */
+            .main {
+                background-color: #f5f7fb;
+            }
+
+            /* หัวข้อหลัก */
+            h1, h2, h3 {
+                font-family: 'Roboto', sans-serif;
+                font-weight: 700;
+                color: #2C3E50;
+                line-height: 1.4;
+            }
+
+            /* หัวข้อย่อย */
+            h2 {
+                font-size: 1.8rem;
+                color: #34495E;
+                margin-bottom: 15px;
+            }
+
+            h3 {
+                font-size: 1.5rem;
+                color: #2980B9;
+                margin-top: 20px;
+                margin-bottom: 10px;
+            }
+
+            /* ข้อความ */
+            p, li {
+                color: #7F8C8D;
+                font-size: 16px;
+                line-height: 1.8;
+            }
+
+            /* เพิ่มระยะห่างระหว่างข้อความ */
+            .content-box {
+                margin-top: 30px;
+                padding: 20px;
+                background-color: white;
+                border-radius: 12px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease-in-out;
+            }
+
+            .content-box:hover {
+                transform: scale(1.02);
+                box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+            }
+
+            /* สไตล์ของปุ่ม */
+            .stButton>button {
+                background-color: #3498DB;
+                color: white;
+                font-size: 16px;
+                font-weight: bold;
+                padding: 12px 24px;
+                border-radius: 8px;
+                border: none;
+                transition: all 0.3s ease;
+            }
+
+            .stButton>button:hover {
+                background-color: #2980B9;
+                transform: scale(1.05);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            /* เพิ่มเส้นขอบในแต่ละหัวข้อ */
+            hr {
+                border: 1px solid #BDC3C7;
+                margin-top: 20px;
+            }
+        </style>
+    """, unsafe_allow_html=True)
+
     st.title("แนวทางการพัฒนา Neural Network สำหรับแยกเพศจากภาพ")
 
     st.header("1. การเตรียมข้อมูล (Data Preparation)")
