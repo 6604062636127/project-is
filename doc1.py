@@ -10,20 +10,35 @@ def app():
             /* พื้นหลัง */
             .main {
                 background-color: #f5f7fb;
+                font-family: 'Roboto', sans-serif;
             }
 
-            /* หัวข้อ */
-            h1, h2, h3 {
-                font-family: 'Roboto', sans-serif;
-                font-weight: 700;
-                color: #2C3E50;
+            /* หัวข้อหลัก */
+            h1 {
+                font-size: 2.8rem;
+                color: #1F3A52;
+                text-align: center;
+                margin-top: 30px;
+                margin-bottom: 20px;
+                font-weight: bold;
+            }
+
+            /* หัวข้อย่อย */
+            h2, h3 {
+                font-size: 1.8rem;
+                color: #2980B9;
+                margin-bottom: 15px;
+            }
+
+            h3 {
+                color: #1E4D87;
             }
 
             /* ข้อความ */
-            p {
+            p, li {
                 color: #7F8C8D;
-                font-size: 18px;
-                line-height: 1.6;
+                font-size: 16px;
+                line-height: 1.8;
             }
 
             /* สไตล์ปุ่ม */
@@ -42,23 +57,6 @@ def app():
                 background-color: #2980B9;
                 transform: scale(1.05);
                 box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            }
-
-            /* สไตล์ของหัวข้อหลัก */
-            .title {
-                color: #1F3A52;
-                font-size: 2.5rem;
-                text-align: center;
-                font-family: 'Roboto', sans-serif;
-                margin-top: 30px;
-                margin-bottom: 20px;
-            }
-
-            /* สไตล์ของหัวข้อย่อย */
-            .header {
-                font-size: 2rem;
-                color: #34495E;
-                margin-bottom: 10px;
             }
 
             /* สไตล์ของกล่องข้อความ */
@@ -82,6 +80,26 @@ def app():
                 color: #3498DB;
                 font-weight: bold;
             }
+
+            /* ชื่อหัวข้อหลัก */
+            .title {
+                font-size: 2.5rem;
+                color: #1F3A52;
+                font-weight: bold;
+                text-align: center;
+                margin-top: 30px;
+                margin-bottom: 20px;
+            }
+
+            /* กล่องข้อความให้ความสำคัญ */
+            .important-box {
+                background-color: #D6EAF8;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                margin-bottom: 30px;
+            }
+
         </style>
     """, unsafe_allow_html=True)
 
@@ -89,19 +107,19 @@ def app():
     st.markdown('<h1 class="title">แนวทางการพัฒนา Machine Learning สำหรับการทำนายราคาบ้าน </h1>', unsafe_allow_html=True)
 
     # 1. ที่มาของ Dataset
-    st.markdown('<div class="header">1. ที่มาของ Dataset</div>', unsafe_allow_html=True)
+    st.markdown('<h2>1. ที่มาของ Dataset</h2>', unsafe_allow_html=True)
     st.write("""
     - ดาวน์โหลด Dataset ที่ใช้ในโปรเจกต์นี้ได้จาก Kaggle 
-    - ลิงค์ Dataset : https://www.kaggle.com/datasets/yasserh/housing-prices-dataset
+    - ลิงค์ Dataset : [Kaggle Housing Prices](https://www.kaggle.com/datasets/yasserh/housing-prices-dataset)
     """)
-    st.markdown('<div class="header">ชนิดของข้อมูล (Data Type)</div>', unsafe_allow_html=True)
+    st.markdown('<h3>ชนิดของข้อมูล (Data Type)</h3>', unsafe_allow_html=True)
     st.write("""
     Housing Prices Dataset
     - 1. ข้อมูลเชิงตัวเลข เช่น ราคาบ้าน, ขนาด, จำนวนห้อง
     - 2. ข้อมูลเชิงหมวดหมู่ เช่น ประเภทของบ้าน, ทำเลที่ตั้ง, วัสดุก่อสร้าง""")
 
     # 2. รายละเอียดของ Dataset
-    st.markdown('<div class="header">2. Feature ของ Dataset</div>', unsafe_allow_html=True)
+    st.markdown('<h2>2. Feature ของ Dataset</h2>', unsafe_allow_html=True)
     st.write("""
     - **price** : ราคาของบ้าน (เป้าหมายที่ต้องทำนาย เนื่องจากมีผลต่อราคาบ้านมากที่สุด)
     - **area** : ขนาดพื้นที่ของบ้าน (ตารางเมตร)
@@ -115,7 +133,7 @@ def app():
     """)
 
     # 3. การเตรียมข้อมูล (Data Preparation)
-    st.markdown('<div class="header">3. การเตรียมข้อมูล (Data Preparation)</div>', unsafe_allow_html=True)
+    st.markdown('<h2>3. การเตรียมข้อมูล (Data Preparation)</h2>', unsafe_allow_html=True)
     st.write("""
     - **การจัดการค่าที่หายไป** : เติมค่าที่หายไปด้วยค่ามัธยฐาน (Median) หรือค่าที่เหมาะสม
     - **การแปลงหน่วย** : แปลงพื้นที่จาก ตารางฟุต เป็น ตารางเมตร เพื่อให้ค่ามีความหมายมากขึ้น
@@ -125,18 +143,18 @@ def app():
     """)
 
     # 4. ผลลัพธ์ของโมเดล
-    st.markdown('<div class="header">4. ผลลัพธ์ของโมเดล</div>', unsafe_allow_html=True)
+    st.markdown('<h2>4. ผลลัพธ์ของโมเดล</h2>', unsafe_allow_html=True)
     st.write("""
     - **Mean Absolute Error (MAE)** : 1,020,847.32 บาท
     - **Mean Absolute Percentage Error (MAPE)** : 21.79%
     - **พารามิเตอร์ที่ดีที่สุดจาก Grid Search** : 
             - max_depth: 10 
             - min_samples_split: 10 
-            - n_estimators': 200}
+            - n_estimators: 200
     """)
 
     # 5 . การวิเคราะห์ผลลัพธ์ (Model Evaluation)
-    st.markdown('<div class="header">5. การวิเคราะห์ผลลัพธ์ทฤษฎีของอัลกอริทึมที่ใช้ (Model Evaluation)</div>', unsafe_allow_html=True)
+    st.markdown('<h2>5. การวิเคราะห์ผลลัพธ์ (Model Evaluation)</h2>', unsafe_allow_html=True)
     st.write(""" 
     - **Linear Regression** : มีค่า R² สูงที่สุด (0.6529) ซึ่งแสดงว่าโมเดลนี้สามารถอธิบายความแปรปรวนในราคาบ้านได้ดีกว่าโมเดลอื่น ๆ
     - **Decision Tree** : มีค่า R² ต่ำที่สุด (0.4771) ซึ่งแสดงว่าโมเดลนี้ไม่สามารถอธิบายข้อมูลได้ดีนัก และมีค่า MSE สูงที่สุด ซึ่งหมายถึงความแม่นยำต่ำ
@@ -144,7 +162,7 @@ def app():
     """)
 
     # 6. เหตุผลในการเลือกใช้ Random Forest สำหรับการทำนายราคาบ้าน
-    st.markdown('<div class="header">6. เหตุผลในการเลือกใช้ Random Forest</div>', unsafe_allow_html=True)
+    st.markdown('<h2>6. เหตุผลในการเลือกใช้ Random Forest</h2>', unsafe_allow_html=True)
     st.write("""
     - **ความสามารถในการจัดการกับข้อมูลที่ซับซ้อน** : Random Forest ใช้การรวมผลจากหลาย ๆ ต้นไม้การตัดสินใจ (decision trees) ซึ่งช่วยให้สามารถจัดการกับความซับซ้อนและความไม่เป็นเชิงเส้น (non-linearity) ของข้อมูลได้ดีกว่าโมเดลเชิงเส้น
     - **ความแม่นยำที่สูงขึ้น** : Random Forest มีค่า Mean Squared Error (MSE) ที่ต่ำกว่า Decision Tree แสดงถึงความแม่นยำที่สูงกว่าในการทำนายราคาบ้าน
@@ -155,3 +173,4 @@ def app():
 
 if __name__ == "__main__":
     app()
+
