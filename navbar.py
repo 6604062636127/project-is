@@ -5,7 +5,7 @@ def navbar():
                <style>
     /* Navbar หลัก */
     .navbar {
-        background: linear-gradient(135deg, #1E3A8A, #3B82F6); /* ไล่สีให้ดูทันสมัย */
+        background: white; /* ไล่สีให้ดูทันสมัย */
         display: flex;
         justify-content: center;
         align-items: center;
@@ -18,7 +18,7 @@ def navbar():
 
     /* ลิงก์ใน Navbar */
     .navbar a {
-        color: white;
+        color: black;
         text-decoration: none;
         padding: 12px 28px;
         font-size: 18px;
@@ -48,7 +48,7 @@ def navbar():
 
     /* ลิงก์ที่กำลังใช้งาน */
     .navbar a.active {
-        background: #3B82F6;
+        background: lightblue;
         font-weight: bold;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
