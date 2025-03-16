@@ -21,7 +21,7 @@ def navbar():
         color: white;
         text-decoration: none;
         padding: 12px 28px;
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 600;
         border-radius: 8px;
         margin: 0 12px;
@@ -58,7 +58,7 @@ def navbar():
     # สร้าง Navbar
     st.markdown("""
         <div class="navbar">
-            <a href="/?page=Home" target="_self" class="active">🛖</a>
+            <a href="/?page=Home" target="_self" class="active">Home</a>
             <a href="/?page=ML" target="_self">Doc ML</a>
             <a href="/?page=Demo ML" target="_self">Demo ML</a>
             <a href="/?page=NN" target="_self">Doc NN</a>
