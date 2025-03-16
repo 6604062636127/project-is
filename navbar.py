@@ -46,12 +46,6 @@ def navbar():
         left: 0;
     }
 
-    /* ลิงก์ที่กำลังใช้งาน */
-    .navbar a.active {
-        background: #3B82F6;
-        font-weight: bold;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
 </style>
     """, unsafe_allow_html=True)
 
