@@ -1,12 +1,4 @@
 import streamlit as st
-
-# กำหนด state ของหน้า
-if "page" not in st.session_state:
-    st.session_state["page"] = "Home"
-
-def set_page(page_name):
-    st.session_state["page"] = page_name
-
 # Navbar UI
 def navbar():
     st.markdown("""
