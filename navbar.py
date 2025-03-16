@@ -1,57 +1,55 @@
 import streamlit as st
+
+# กำหนด state ของหน้า
+if "page" not in st.session_state:
+    st.session_state["page"] = "Home"
+
+def set_page(page_name):
+    st.session_state["page"] = page_name
+
+# Navbar UI
 def navbar():
-    # CSS สำหรับ Navbar แนวนอน
     st.markdown("""
-               <style>
-        /* Navbar หลัก */
-        .navbar {{
-            background: linear-gradient(135deg, #1E3A8A, #3B82F6);
+        <style>
+        .nav-container {
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 14px 24px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            border-radius: 12px;
-            font-family: 'Poppins', sans-serif;
+            gap: 10px;
             margin-bottom: 20px;
-        }}
-
-        /* ลิงก์ใน Navbar */
-        .navbar a {{
+        }
+        .nav-btn {
+            background: linear-gradient(135deg, #1E3A8A, #3B82F6);
             color: white;
-            text-decoration: none;
-            padding: 12px 28px;
+            border: none;
+            padding: 10px 20px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: bold;
             border-radius: 8px;
-            margin: 0 12px;
-            transition: all 0.3s ease-in-out;
-            position: relative;
-            overflow: hidden;
-        }}
-
-        /* เอฟเฟกต์ hover */
-        .navbar a:hover {{
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .nav-btn:hover {
             background: rgba(255, 255, 255, 0.2);
             transform: scale(1.05);
-        }}
-
-        /* ลิงก์ที่กำลังใช้งาน */
-        .navbar a.active {{
-            background: #4CAF50;  /* เปลี่ยนเป็นสีเขียว */
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }}
+        }
+        .nav-active {
+            background: #4CAF50 !important;
+        }
         </style>
     """, unsafe_allow_html=True)
 
-    # สร้าง Navbar
-    st.markdown("""
-        <div class="navbar">
-            <a href="/?page=Home" target="_self" class="active">Home</a>
-            <a href="/?page=ML" target="_self">Doc ML</a>
-            <a href="/?page=Demo ML" target="_self">Demo ML</a>
-            <a href="/?page=NN" target="_self">Doc NN</a>
-            <a href="/?page=Demo NN" target="_self">Demo NN</a>
-        </div>
-    """, unsafe_allow_html=True)
+    st.markdown('<div class="nav-container">', unsafe_allow_html=True)
+    
+    pages = ["Home", "Doc ML", "Demo ML", "Doc NN", "Demo NN"]
+    for page in pages:
+        is_active = "nav-btn nav-active" if st.session_state["page"] == page else "nav-btn"
+        if st.button(page, key=page, on_click=set_page, args=(page,)):
+            pass  # ใช้ session_state จัดการเปลี่ยนหน้า
+
+    st.markdown('</div>', unsafe_allow_html=True)
+
+# เรียกใช้ Navbar
+navbar()
+
+# แสดงผลลัพธ์ของแต่ละหน้า
+st.write(f"### คุณกำลังอยู่ที่หน้า: {st.session_state['page']}")
