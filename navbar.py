@@ -2,51 +2,61 @@ import streamlit as st
 def navbar():
     # CSS สำหรับ Navbar แนวนอน
     st.markdown("""
-        <style>
-    /* Navbar หลัก */
-    .navbar {
-        background: linear-gradient(135deg, #1E3A8A, #3B82F6); /* ไล่สีให้ดูทันสมัย */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 14px 24px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        border-radius: 12px;
-        font-family: 'Poppins', sans-serif;
-        margin-bottom: 20px;
-    }
+       <style>
+        /* พื้นหลังหลักของเว็บ */
+        body {{
+            background-color: #ffffff !important; /* พื้นหลังสีขาว */
+        }}
 
-    /* ลิงก์ใน Navbar */
-    .navbar a {
-        color: white;
-        text-decoration: none;
-        padding: 12px 28px;
-        font-size: 16px;
-        font-weight: 600;
-        border-radius: 8px;
-        margin: 0 12px;
-        transition: all 0.3s ease-in-out;
-        position: relative;
-        overflow: hidden;
-    }
+        /* Navbar หลัก */
+        .navbar-container {{
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }}
 
-    /* เอฟเฟกต์ไฮไลท์เมื่อ hover */
-    .navbar a::before {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: rgba(255, 255, 255, 0.2);
-        top: 0;
-        left: -100%;
-        transition: left 0.3s ease-in-out;
-    }
+        .navbar {{
+            background: #ffffff; /* พื้นหลังสีขาว */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 14px 24px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* เงาเบาๆ */
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            border: 1px solid #ddd; /* ขอบบางๆ */
+            width: 80%;
+            max-width: 900px;
+        }}
 
-    .navbar a:hover::before {
-        left: 0;
-    }
+        /* ลิงก์ใน Navbar */
+        .navbar a {{
+            color: #1E3A8A;
+            text-decoration: none;
+            padding: 12px 28px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            margin: 0 12px;
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }}
 
-</style>
+        /* เอฟเฟกต์ hover */
+        .navbar a:hover {{
+            background: rgba(62, 130, 255, 0.2);
+            transform: scale(1.05);
+        }}
+
+        /* ลิงก์ที่กำลังใช้งาน */
+        .navbar a.active {{
+            background: #4CAF50;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }}
+        </style>
     """, unsafe_allow_html=True)
 
     # สร้าง Navbar
