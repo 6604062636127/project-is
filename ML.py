@@ -6,8 +6,7 @@ import matplotlib.pyplot as plt
 def app():
     # Title and header
     st.title("House Price Prediction")
-    st.header("Input Feature")
-
+    
     # โหลดโมเดลจากไฟล์
     with open('random_forest_model.pkl', 'rb') as file:
         model = pickle.load(file)
