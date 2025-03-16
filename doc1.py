@@ -86,7 +86,7 @@ def app():
     """, unsafe_allow_html=True)
 
     # หัวข้อหลัก
-    st.markdown('<h1 class="title">การทำนายราคาบ้านด้วย Machine Learning</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 class="title">แนวทางการพัฒนา Machine Learning สำหรับการทำนายราคาบ้าน </h1>', unsafe_allow_html=True)
 
     # 1. ที่มาของ Dataset
     st.markdown('<div class="header">1. ที่มาของ Dataset</div>', unsafe_allow_html=True)
