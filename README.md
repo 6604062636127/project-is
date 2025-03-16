@@ -1,4 +1,4 @@
-# project-is
+# Project-is
 
 เป็นารพัฒนาโมเดล
 
@@ -7,8 +7,8 @@
 โปรเจกต์นี้เป็นแอปพลิเคชันที่สร้างด้วย Streamlit ซึ่งมีฟีเจอร์ดังนี้:
 - หน้าแรก
 - เอกสาร Machine Learning
-- เอกสาร Neural Network
 - การสาธิต Machine Learning
+- เอกสาร Neural Network
 - การสาธิต Neural Network
 
 ## Dataset ของ Neuron network 
