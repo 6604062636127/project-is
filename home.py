@@ -16,6 +16,13 @@ st.session_state["page"] = page
 # แสดงหน้าที่เลือก
 if page == "Home":
     st.title("Home Page")
+    st.subheader("Welcome to the Machine Learning & Neural Network Dashboard!")
+
+    # คำอธิบายเกี่ยวกับเว็บไซต์
+    st.write("""
+    เว็บไซต์นี้เป็นแพลตฟอร์มสำหรับการศึกษาและทดลองเกี่ยวกับ **Machine Learning (ML)** และ **Neural Networks (NN)**  
+    สามารถดูเอกสารเกี่ยวกับ Machine Learning (ML) และ Neural Networks (NN) รวมถึงทดลองใช้งานโมเดลที่เราพัฒนาขึ้นมาได้จากเมนูด้านบน
+    """)
 elif page == "ML":
     app_doc1()  # เรียกใช้ app จาก doc1
 elif page == "NN":
