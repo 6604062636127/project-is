@@ -1,7 +1,7 @@
 import streamlit as st
 
 # กำหนดธีมของ Streamlit ก่อนที่จะมีการเรียกใช้คำสั่งอื่น ๆ
-st.set_page_config(page_title="Predict House", layout="wide")
+st.set_page_config(page_title="ทำนายราคาบ้าน", layout="wide")
 
 def app():
     # สไตล์ที่ปรับปรุงให้ทันสมัย
