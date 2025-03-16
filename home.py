@@ -86,8 +86,8 @@ if page == "Home":
         เว็บไซต์นี้เป็นแพลตฟอร์มสำหรับการศึกษาและทดลองเกี่ยวกับ **Machine Learning (ML)** และ **Neural Networks (NN)**  
         สามารถดูเอกสารเกี่ยวกับ Machine Learning และ Neural Networks รวมถึงทดลองใช้งานโมเดลที่พัฒนาขึ้นมาได้จากเมนูด้านบน  
     """)
+    st.markdown('</div>', unsafe_allow_html=True)  # ปิด div tag เพื่อให้ข้อความอยู่ภายในกล่อง
 
-    st.markdown('</div>', unsafe_allow_html=True)
 
 elif page == "ML":
     app_doc1()  # เรียกใช้ app จาก doc1
