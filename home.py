@@ -30,6 +30,13 @@ st.markdown("""
             margin-bottom: 20px;
             font-family: 'Arial', sans-serif;
         }
+        .written{
+            color: #4A5568;
+            font-size: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-family: 'Arial', sans-serif;
+        }
         .stButton>button {
             background: linear-gradient(135deg, #1E3A8A, #3B82F6);
             color: white;
@@ -67,11 +74,8 @@ st.markdown("""
 if page == "Home":
     st.markdown('<h1 class="title">🏠 Home Page</h1>', unsafe_allow_html=True)
     st.markdown('<p class="subtitle">Welcome to the Machine Learning & Neural Network!</p>', unsafe_allow_html=True)
-
-    st.write("""
-        เว็บไซต์นี้เป็นแพลตฟอร์มสำหรับการศึกษาและทดลองเกี่ยวกับ **Machine Learning (ML)** และ **Neural Networks (NN)**  
-        สามารถดูเอกสารเกี่ยวกับ Machine Learning และ Neural Networks รวมถึงทดลองใช้งานโมเดลที่พัฒนาขึ้นมาได้จากเมนูด้านบน  
-    """)
+    st.markdown('<p class="written">เว็บไซต์นี้เป็นแพลตฟอร์มสำหรับการศึกษาและทดลองเกี่ยวกับ **Machine Learning (ML)** และ **Neural Networks (NN)**  
+        สามารถดูเอกสารเกี่ยวกับ Machine Learning และ Neural Networks รวมถึงทดลองใช้งานโมเดลที่พัฒนาขึ้นมาได้จากเมนูด้านบน  </p>', unsafe_allow_html=True)
 
 elif page == "ML":
     app_doc1()  # เรียกใช้ app จาก doc1
