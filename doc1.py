@@ -91,12 +91,17 @@ def app():
     # 1. ที่มาของ Dataset
     st.markdown('<div class="header">1. ที่มาของ Dataset</div>', unsafe_allow_html=True)
     st.write("""
-    - Dataset ที่ใช้ในโปรเจกต์นี้สามารถดาวน์โหลดได้จาก Kaggle 
+    - ดาวน์โหลด Dataset ที่ใช้ในโปรเจกต์นี้ได้จาก Kaggle 
     - ลิงค์ Dataset : https://www.kaggle.com/datasets/yasserh/housing-prices-dataset
     """)
+    st.markdown('<div class="header">ชนิดของข้อมูล (Data Type)</div>', unsafe_allow_html=True)
+    st.write("""
+    Housing Prices Dataset
+    - 1. ข้อมูลเชิงตัวเลข เช่น ราคาบ้าน, ขนาด, จำนวนห้อง
+    - 2. ข้อมูลเชิงหมวดหมู่ เช่น ประเภทของบ้าน, ทำเลที่ตั้ง, วัสดุก่อสร้าง""")
 
     # 2. รายละเอียดของ Dataset
-    st.markdown('<div class="header">2. รายละเอียดของ Dataset</div>', unsafe_allow_html=True)
+    st.markdown('<div class="header">2. Feature ของ Dataset</div>', unsafe_allow_html=True)
     st.write("""
     - **price** : ราคาของบ้าน (เป้าหมายที่ต้องทำนาย เนื่องจากมีผลต่อราคาบ้านมากที่สุด)
     - **area** : ขนาดพื้นที่ของบ้าน (ตารางเมตร)
@@ -109,8 +114,8 @@ def app():
     - **furnishingstatus** : สถานะเฟอร์นิเจอร์ (Furnished/Semi-Furnished/Unfurnished)
     """)
 
-    # 3. กระบวนการเตรียมข้อมูล
-    st.markdown('<div class="header">3. กระบวนการเตรียมข้อมูล</div>', unsafe_allow_html=True)
+    # 3. การเตรียมข้อมูล (Data Preparation)
+    st.markdown('<div class="header">3. การเตรียมข้อมูล (Data Preparation)</div>', unsafe_allow_html=True)
     st.write("""
     - **การจัดการค่าที่หายไป** : เติมค่าที่หายไปด้วยค่ามัธยฐาน (Median) หรือค่าที่เหมาะสม
     - **การแปลงหน่วย** : แปลงพื้นที่จาก ตารางฟุต เป็น ตารางเมตร เพื่อให้ค่ามีความหมายมากขึ้น
@@ -130,8 +135,8 @@ def app():
             - n_estimators': 200}
     """)
 
-    # 5 . การวิเคราะห์ผลลัพธ์
-    st.markdown('<div class="header">5. การวิเคราะห์ผลลัพธ์</div>', unsafe_allow_html=True)
+    # 5 . การวิเคราะห์ผลลัพธ์ (Model Evaluation)
+    st.markdown('<div class="header">5. การวิเคราะห์ผลลัพธ์ทฤษฎีของอัลกอริทึมที่ใช้ (Model Evaluation)</div>', unsafe_allow_html=True)
     st.write(""" 
     - **Linear Regression** : มีค่า R² สูงที่สุด (0.6529) ซึ่งแสดงว่าโมเดลนี้สามารถอธิบายความแปรปรวนในราคาบ้านได้ดีกว่าโมเดลอื่น ๆ
     - **Decision Tree** : มีค่า R² ต่ำที่สุด (0.4771) ซึ่งแสดงว่าโมเดลนี้ไม่สามารถอธิบายข้อมูลได้ดีนัก และมีค่า MSE สูงที่สุด ซึ่งหมายถึงความแม่นยำต่ำ
