@@ -2,36 +2,23 @@ import streamlit as st
 def navbar():
     # CSS สำหรับ Navbar แนวนอน
     st.markdown("""
-       <style>
-        /* พื้นหลังหลักของเว็บ */
-        body {{
-            background-color: #ffffff !important; /* พื้นหลังสีขาว */
-        }}
-
+               <style>
         /* Navbar หลัก */
-        .navbar-container {{
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }}
-
         .navbar {{
-            background: #ffffff; /* พื้นหลังสีขาว */
+            background: linear-gradient(135deg, #1E3A8A, #3B82F6);
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 14px 24px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* เงาเบาๆ */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             border-radius: 12px;
             font-family: 'Poppins', sans-serif;
-            border: 1px solid #ddd; /* ขอบบางๆ */
-            width: 80%;
-            max-width: 900px;
+            margin-bottom: 20px;
         }}
 
         /* ลิงก์ใน Navbar */
         .navbar a {{
-            color: #1E3A8A;
+            color: white;
             text-decoration: none;
             padding: 12px 28px;
             font-size: 16px;
@@ -45,16 +32,15 @@ def navbar():
 
         /* เอฟเฟกต์ hover */
         .navbar a:hover {{
-            background: rgba(62, 130, 255, 0.2);
+            background: rgba(255, 255, 255, 0.2);
             transform: scale(1.05);
         }}
 
         /* ลิงก์ที่กำลังใช้งาน */
         .navbar a.active {{
-            background: #4CAF50;
-            color: white;
+            background: #4CAF50;  /* เปลี่ยนเป็นสีเขียว */
             font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }}
         </style>
     """, unsafe_allow_html=True)
