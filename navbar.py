@@ -3,45 +3,56 @@ def navbar():
     # CSS สำหรับ Navbar แนวนอน
     st.markdown("""
         <style>
-            /* Navbar หลัก */
-            .navbar {
-                background-color: #1E3A8A; /* สีพื้นหลังฟ้าเข้ม */
-                overflow: hidden;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 12px 20px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เงาสวยงาม */
-                border-radius: 8px; /* มุมมน */
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            }
+    /* Navbar หลัก */
+    .navbar {
+        background: linear-gradient(135deg, #1E3A8A, #3B82F6); /* ไล่สีให้ดูทันสมัย */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 14px 24px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        border-radius: 12px;
+        font-family: 'Poppins', sans-serif;
+        margin-bottom: 20px;
+    }
 
-            /* ลิงก์ใน Navbar */
-            .navbar a {
-                color: white;
-                text-decoration: none;
-                padding: 12px 24px;
-                font-size: 18px;
-                font-weight: 500;
-                border-radius: 6px;
-                margin: 0 10px;
-                transition: background-color 0.3s, transform 0.3s; /* การเปลี่ยนสีพื้นหลังและการแสดงผล */
-            }
+    /* ลิงก์ใน Navbar */
+    .navbar a {
+        color: white;
+        text-decoration: none;
+        padding: 12px 28px;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 8px;
+        margin: 0 12px;
+        transition: all 0.3s ease-in-out;
+        position: relative;
+        overflow: hidden;
+    }
 
-            /* ลิงก์เมื่อ Hover */
-            .navbar a:hover {
-                background-color: #4CAF50; /* สีพื้นหลังเมื่อ hover */
-                transform: scale(1.1); /* ขยายเล็กน้อยเมื่อ hover */
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* เพิ่มเงาเมื่อ hover */
-            }
+    /* เอฟเฟกต์ไฮไลท์เมื่อ hover */
+    .navbar a::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.2);
+        top: 0;
+        left: -100%;
+        transition: left 0.3s ease-in-out;
+    }
 
-            /* ลิงก์ที่กำลังใช้งาน */
-            .navbar a.active {
-                background-color: #3B82F6; /* สีพื้นหลังสำหรับลิงก์ที่ใช้งานอยู่ (สีน้ำเงิน) */
-                font-weight: bold;
-            }
+    .navbar a:hover::before {
+        left: 0;
+    }
 
-        </style>
+    /* ลิงก์ที่กำลังใช้งาน */
+    .navbar a.active {
+        background: #4CAF50;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+</style>
     """, unsafe_allow_html=True)
 
     # สร้าง Navbar
