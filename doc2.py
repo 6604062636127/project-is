@@ -20,23 +20,24 @@ def app():
             /* หัวข้อย่อย */
             h2 {
                 font-size: 1.8rem;
-                color: #34495E;
+                color: #1E4D87;  /* สีน้ำเงินเข้ม */
                 margin-bottom: 15px;
             }
 
             h3 {
                 font-size: 1.5rem;
-                color: #2980B9;
+                color: #2980B9;  /* สีน้ำเงินกลาง */
                 margin-top: 20px;
                 margin-bottom: 10px;
             }
 
             /* ข้อความ */
             p, li {
-                color: #7F8C8D;
+                color: #5D6D7E;  /* สีเท้าน้ำเงิน */
                 font-size: 16px;
                 line-height: 1.8;
             }
+
 
             /* เพิ่มระยะห่างระหว่างข้อความ */
             .content-box {
