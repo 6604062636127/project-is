@@ -16,18 +16,6 @@ st.session_state["page"] = page
 # CSS สำหรับตกแต่ง
 st.markdown("""
     <style>
-        .content-box {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            transition: transform 0.3s ease-in-out;
-        }
-        .content-box:hover {
-            transform: scale(1.02);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-        }
         .title {
             color: #1E3A8A;
             font-size: 36px;
@@ -80,14 +68,10 @@ if page == "Home":
     st.markdown('<h1 class="title">🏠 Home Page</h1>', unsafe_allow_html=True)
     st.markdown('<p class="subtitle">Welcome to the Machine Learning & Neural Network!</p>', unsafe_allow_html=True)
 
-    # กล่องข้อมูล
-    st.markdown('<div class="content-box">', unsafe_allow_html=True)
     st.write("""
         เว็บไซต์นี้เป็นแพลตฟอร์มสำหรับการศึกษาและทดลองเกี่ยวกับ **Machine Learning (ML)** และ **Neural Networks (NN)**  
         สามารถดูเอกสารเกี่ยวกับ Machine Learning และ Neural Networks รวมถึงทดลองใช้งานโมเดลที่พัฒนาขึ้นมาได้จากเมนูด้านบน  
     """)
-    st.markdown('</div>', unsafe_allow_html=True)  # ปิด div tag เพื่อให้ข้อความอยู่ภายในกล่อง
-
 
 elif page == "ML":
     app_doc1()  # เรียกใช้ app จาก doc1
